@@ -30,16 +30,23 @@ class CustomerDetails:
     self.startingBalanceType=customer.get('StartingBalanceType',None)
     
   @property
-  def customfield_list(self):
+  def customer_customfield_list(self):
     li=[]
     for item in self.customFields:
       c=CustomFieldsAll(self.custom_field_list).get_custom_field(item)
       c.value=self.customFields[item]
       li.append(c)
     return li      
-    
+  
+  def get_customfield_value(self,field):
+    for item in self.customer_customfield_list:
+        if item.name==field:
+          return item.value
+    return None  
+  
   def __str__(self):
     return self.name
+  
  
 class SupplierDetails:
   def __init__(self,supplier={}):
