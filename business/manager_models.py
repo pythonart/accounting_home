@@ -38,11 +38,14 @@ class CustomerDetails:
       li.append(c)
     return li      
   
-  def get_customfield_value(self,field):
+  def get_customfield_value(self,findterm):
+    findterm=findterm.strip()
+    pattern='.*'+findterm+'.*'
     for item in self.customer_customfield_list:
-        if item.name==field:
-          return item.value
-    return None  
+      match=re.match(pattern,item.name)
+      if match is not None:
+        return item.value
+    return None
   
   def __str__(self):
     return self.name
