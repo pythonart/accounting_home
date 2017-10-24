@@ -58,7 +58,7 @@ class Support_request(models.Model):
 	date_time=models.DateTimeField("Enter Appointment Date/ Time")
 	request_type=models.ForeignKey(SupportTypes)
 	date_created=models.DateTimeField(auto_now=True)
-	request_closed=models.CharField("Request Status",choices=(('OPEN','OPEN'),('CLOSED','CLOSED')),default='OPEN')
+	request_closed=models.CharField("Request Status",choices=(('OPEN','OPEN'),('CLOSED','CLOSED')),max_length=50,default='OPEN')
 	
 	def __str__(self):
 	    return self.user + " " + self.date_time
