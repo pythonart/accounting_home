@@ -48,7 +48,7 @@ class Business_request(models.Model):
 		return  "%s  %s" % (self.user , self.business_name)
 
 class Support_request(models.Model):
-	user=models.ForeignKey("auth.User')
+	user=models.ForeignKey("auth.User")
 	date_time=models.DateTimeField("Enter Appointment Date/ Time")
 	request_type=models.ForeignKey(SupportTypes)
 	date_created=models.DateTimeField(auto_now=True)
