@@ -55,19 +55,19 @@ class Support_request(models.Model):
 	request_closed=models.CharField("Request Status",choices=(('OPEN','OPEN'),('CLOSED','CLOSED')),default='OPEN')
 	
 	def __str__(self):
-		return self.user + " " + self.date_time
+	    return self.user + " " + self.date_time
 	
 			       
 class SupportTypes(models.Model):
 	support_reason=models.CharField("Support Type",max_legnth=200)
 	
-    def __str__(self):
-		return self.support_reason		
+    	def __str__(self):
+	    return self.support_reason		
 	   
 			       
 class SendMails(models.Model):
 	email_id=models.EmailField("Email Address",help_text="Emails of Business Request Will be Sent To")
 	
 	def __str__(self):
-		return " %s " % self.email_id
+	    return " %s " % self.email_id
 	
