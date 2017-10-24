@@ -47,6 +47,12 @@ class Business_request(models.Model):
 	def __str__(self):
 		return  "%s  %s" % (self.user , self.business_name)
 	
+class SupportTypes(models.Model):
+	support_reason=models.CharField("Support Type",max_legnth=200)
+	
+	def __str__(self):
+	   return self.support_reason	
+	
 class Support_request(models.Model):
 	user=models.ForeignKey("auth.User")
 	date_time=models.DateTimeField("Enter Appointment Date/ Time")
@@ -56,13 +62,7 @@ class Support_request(models.Model):
 	
 	def __str__(self):
 	    return self.user + " " + self.date_time
-	
-			       
-class SupportTypes(models.Model):
-	support_reason=models.CharField("Support Type",max_legnth=200)
-	
-	def __str__(self):
-	   return self.support_reason		
+			
 	   
 			       
 class SendMails(models.Model):
