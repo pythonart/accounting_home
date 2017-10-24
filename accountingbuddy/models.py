@@ -8,6 +8,7 @@ SALES_PARTNER_CHOICES=(('SALESPARTNER','SALESPARTNER'),('INDIVIDUAL','INDIVIDUAL
 BUSINESS_TYPE=( ('SERVICE','SERVICES' ),('MANUFACTURING','MANUFACTURING'),('SALES','SALES'),('PERSONAL','PERSONAL'),('SOCIETY','SOCIETY' ),('SCHOOL','SCHOOL'),('SUPER MARKER','SUPER MARKET'),)
 
 
+
 class MyProfile(models.Model):
 	user=models.OneToOneField("auth.User")
 	company_name=models.CharField("Company Name",max_length=200,)
@@ -46,6 +47,24 @@ class Business_request(models.Model):
 	def __str__(self):
 		return  "%s  %s" % (self.user , self.business_name)
 
+class Support_request(models.Model):
+	user=models.ForeignKey("auth.User')
+	date_time=models.DateTimeField("Enter Appointment Date/ Time")
+	request_type=models.ForeignKey(SupportTypes)
+	date_created=models.DateTimeField(auto_now=True)
+	request_closed=models.CharField("Request Status",choices=(('OPEN','OPEN'),('CLOSED','CLOSED')),default='OPEN')
+	
+	def __str__(self):
+		return self.user + " " + self.date_time
+	
+			       
+class SupportTypes(models.Model):
+	support_reason=models.CharField("Support Type",max_legnth=200)
+	
+    def __str__(self):
+		return self.support_reason		
+	   
+			       
 class SendMails(models.Model):
 	email_id=models.EmailField("Email Address",help_text="Emails of Business Request Will be Sent To")
 	
