@@ -19,7 +19,7 @@ class SupportReqForm(ModelForm):
 	class Meta:
 		model=Support_request
 		fields=['date_time','request_type','request_closed',]
-		widgets={'datetime': DateTimeWidget(attrs={'id':"yourdatetimeid"}, usel10n = True, bootstrap_version=3), }
+		widgets={'datetime': DateTimeWidget(attrs={'id':"id_date_time"}, usel10n = True, bootstrap_version=3), }
 		
 
 
