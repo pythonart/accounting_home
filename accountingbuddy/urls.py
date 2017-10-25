@@ -10,5 +10,5 @@ urlpatterns=[
 url(r'^pricing/india/$',views.pricing_india,name='pricing-india'),
 url(r'^businessrequest/submit/$',views.businessRequestFormView,name='business-req'),
 url(r'^thankyou/$',TemplateView.as_view(template_name='thanks.html'),name='thanks'),
-url(r'^supportrequest/create/$,views.SupportRequestView.as_view(),name='suppport-req'),
+url(r'^supportrequest/create/$',views.SupportRequestView.as_view(),name='suppport-req'),
 ]
