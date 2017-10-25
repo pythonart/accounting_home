@@ -17,8 +17,8 @@ def file_size(value): # Check File Size
 class SupportReqForm(ModelForm):
 	class Meta:
 		model=Support_request
-		fields=['user','date_time','request_type','request_closed',]
-		widgets={'date_time' :forms.DateTimeInput(attrs={'class':'datetimepicker1'}) , }
+		fields=['date_time','request_type','request_closed',]
+		widgets={'date_time' :forms.DateTimeInput(attrs={'class':'datepicker'}) , }
 
 
 class BusinessRequestForm(ModelForm):
