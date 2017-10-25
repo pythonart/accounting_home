@@ -18,7 +18,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
-from accountingbuddy.models import MyProfile, Pricing, Business_request, SendMails
+from accountingbuddy.models import MyProfile, Pricing, Business_request, SendMails,Support_request
 from .forms import BusinessRequestForm 
 
 # Create your views here.
@@ -77,6 +77,14 @@ def businessRequestFormView(request):
 	else:
 		form = BusinessRequestForm(request=request)
 	return render(request, 'business_request_form.html', {'form': form})
+
+@login_required
+def SupportRequestView(LoginRequiredMixin,CreateView):
+    model=Support_request
+    template_name='accountingbuddy/business_request_form.html'
+    
+    
+	
 
 
 
