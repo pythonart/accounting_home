@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from mezzanine.accounts.forms import ProfileForm
 from django.core.mail import EmailMultiAlternatives
 from .models import  Business_request, MyProfile , Pricing, Support_request
-from datetimewidget.widgets import DateTimeWidget # For Date time widgets https://github.com/asaglimbeni/django-datetime-widget
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 
@@ -19,7 +18,7 @@ class SupportReqForm(ModelForm):
 	class Meta:
 		model=Support_request
 		fields=['date_time','request_type','request_closed',]
-		widgets={'datetime': DateTimeWidget(attrs={'id':"id_date_time"}, usel10n = True, bootstrap_version=3), }
+		widgets={'datetime': forms.DateTimeInput(attrs={'class':'datepicker'}), }
 		
 
 
