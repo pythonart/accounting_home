@@ -61,7 +61,7 @@ class Support_request(models.Model):
 	request_closed=models.CharField("Request Status",choices=(('OPEN','OPEN'),('CLOSED','CLOSED')),max_length=50,default='OPEN')
 	
 	def __str__(self):
-	    return self.user + " " + self.date_time
+	    return "%s  %s" % (self.user,self.date_time)
 			
 	   
 			       
