@@ -31,19 +31,10 @@
     <div  class="box-body">
       <div class="form-group">  
         <form enctype="multipart/form-data"  method="POST">
-            
-        <script type="text/javascript">
-            $(function () {
-                $('.datetimepicker2').datetimepicker({
-                    locale: 'ru'
-                });
-            });
-        </script>         
-            
+
              {% csrf_token %}
-                    {% bootstrap_form_errors form type='non_fields' %}
-                    {% bootstrap_field form.date_time label_class='datetimepicker2' %}
-       
+                    {% bootstrap_form form %}
+
                   {% buttons %}
 
               <button type="submit" value="Submit" class="btn btn-primary">
