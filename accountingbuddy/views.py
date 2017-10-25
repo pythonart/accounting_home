@@ -78,10 +78,10 @@ def businessRequestFormView(request):
 		form = BusinessRequestForm(request=request)
 	return render(request, 'business_request_form.html', {'form': form})
 
-@login_required
-def SupportRequestView(LoginRequiredMixin,CreateView):
-    model=Support_request
-    template_name='accountingbuddy/business_request_form.html'
+
+class SupportRequestView(LoginRequiredMixin,CreateView):
+      model=Support_request
+      template_name='accountingbuddy/business_request_form.html'
     
     
 	
