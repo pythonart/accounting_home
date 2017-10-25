@@ -31,9 +31,26 @@
     <div  class="box-body">
       <div class="form-group">  
         <form enctype="multipart/form-data"  method="POST">
- 
+            
+<link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery-3.1.1.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/moment-master/min/moment.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+ <script type="text/javascript">
+    $(function () {
+    $('.datepicker').datetimepicker(
+    {
+        format: 'YYYY-MM-DD HH:mm:ss',
+        sideBySide: true
+    }
+    );
+});
+</script>           
+            
              {% csrf_token %}
-                    {% bootstrap_field form.date_time %}
+                    {% bootstrap_form_errors form type='non_fields' %}
+                    {% bootstrap_field form.date_time field_class='datepicker' %}
        
                   {% buttons %}
 
@@ -44,4 +61,5 @@
 
            
        </form>
+          
 {% endblock %}
