@@ -34,9 +34,8 @@
  
              {% csrf_token %}
           
-             
-                   
-                    {% bootstrap_field date_time %}
+                   {% bootstrap_form form %}
+                    {% bootstrap_field date_time set_disabled=True %}
        
                   {% buttons %}
 
