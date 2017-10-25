@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm , Textarea
+from django.forms import ModelForm , Textarea , DateTimeInput
 from django.core.exceptions import ValidationError
 from mezzanine.accounts.forms import ProfileForm
 from django.core.mail import EmailMultiAlternatives
@@ -18,7 +18,7 @@ class SupportReqForm(ModelForm):
 	class Meta:
 		model=Support_request
 		fields=['date_time','request_type','request_closed',]
-		widgets={'datetime': forms.DateTimeInput(attrs={'class':'datepicker'}), }
+		widgets={'datetime': forms.DateTimeInput(attrs={'text':'date'}), }
 		
 
 
