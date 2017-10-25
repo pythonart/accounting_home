@@ -18,7 +18,7 @@ class SupportReqForm(ModelForm):
 	class Meta:
 		model=Support_request
 		fields=['date_time','request_type','request_closed',]
-		widgets={'datetime': forms.DateTimeInput(attrs={'text':'date'}), }
+		widgets={'datetime': forms.DateInput(attrs={'text':'date'}), }
 		
 
 
