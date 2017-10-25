@@ -28,6 +28,11 @@
 {% bootstrap_messages %}
 
     {{ form.non_form_errors }}  {# For fromset errors  #}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
     <div  class="box-body">
       <div class="form-group">  
         <form enctype="multipart/form-data"  method="POST">
@@ -44,5 +49,13 @@
 
            
        </form>
-          
+   <script type="text/javascript">
+    $(function () {
+        $('#datetimepicker12').datetimepicker({
+            inline: true,
+            sideBySide: true,
+            format: 'DD.MM.YYYY' /*remove this line if you want to use time as well */
+        });
+    });
+</script>   
 {% endblock %}
