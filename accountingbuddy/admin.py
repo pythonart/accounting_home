@@ -7,7 +7,11 @@ admin.site.register(Pricing)
 admin.site.register(Business_request)
 admin.site.register(SendMails)
 admin.site.register(SupportTypes)
-admin.site.register(Support_request)
+
+
+class SupportRequestAdmin(admin.ModelAdmin):
+  fields=('user','date_time','request_type','date_created','request_closed')
 
 
 
+admin.site.register(Support_request,SupportRequestAdmin)
