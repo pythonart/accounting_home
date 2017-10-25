@@ -82,7 +82,7 @@ def businessRequestFormView(request):
 class SupportRequestView(LoginRequiredMixin,CreateView):
       model=Support_request
       template_name='accountingbuddy/business_request_form.html'
-      fields=['user','date_time','request_type','date_created','request_closed',]
+      fields=['user','date_time','request_type','request_closed',]
     
     
 	
