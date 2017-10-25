@@ -19,7 +19,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
 from accountingbuddy.models import MyProfile, Pricing, Business_request, SendMails,Support_request
-from .forms import BusinessRequestForm 
+from .forms import BusinessRequestForm , SupportReqForm
 
 # Create your views here.
 
@@ -81,8 +81,9 @@ def businessRequestFormView(request):
 
 class SupportRequestView(LoginRequiredMixin,CreateView):
       model=Support_request
+      form_class=SupportReqForm
       template_name='accountingbuddy/business_request_form.html'
-      fields=['user','date_time','request_type','request_closed',]
+     
     
     
 	
