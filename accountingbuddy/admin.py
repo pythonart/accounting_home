@@ -10,7 +10,7 @@ admin.site.register(SupportTypes)
 
 
 class SupportRequestAdmin(admin.ModelAdmin):
-  fields=('user','date_time','request_type','date_created','request_closed')
+  fields=('user','date_time','request_type','request_closed')
 
 
 
