@@ -99,7 +99,7 @@ def supportRequestView(request):
 			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
 			msg.attach_alternative(html_content, "text/html")	
 			msg.send()
-			return HttpResponseRedirect(reverse('accountingbuddy:thanks'))
+			return HttpResponseRedirect(reverse('accountingbuddy:thanks_support'))
 	else:
 		form = SupportReqForm()
 	return render(request, 'datepick.html', {'form': form})
