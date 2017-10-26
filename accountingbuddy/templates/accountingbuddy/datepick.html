@@ -1,27 +1,63 @@
 
-       <html>
- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-       
-       
-       <form enctype="multipart/form-data"  method="POST">
+    {% extends "nova/base.html" %}
+{% load mezzanine_tags keyword_tags %}
 
-     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
-           
+{% block meta_title %}{{ page.meta_title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+              
+{% bootstrap_messages %}
+
+    {{ form.non_form_errors }}  {# For fromset errors  #}
+
+    <div  class="box-body">
+      <div class="form-group">  
+        <form enctype="multipart/form-data"  method="POST">
+
+             {% csrf_token %}
+               
+                    {% bootstrap_form form %}
+
+                  {% buttons %}
+
+              <button type="submit" value="Submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Submit
+              </button> 
+                {% endbuttons %}
        </form>
-   <script type="text/javascript">
-    $(function () {
-        $('.datetimepicker12').datetimepicker({
-            inline: true,
-            sideBySide: true,
-            format :"YYYY-MM-DD HH:mm:ss"
-        });
-    });
-</script>   
-</html>
+        <script type="text/javascript">
+           $(function () {
+               $('.datetimepicker12').datetimepicker({
+                   inline: true,
+                   sideBySide: true,
+                   format :"YYYY-MM-DD HH:mm:ss"
+               });
+           });
+       </script>  
 
+{% endblock %}
