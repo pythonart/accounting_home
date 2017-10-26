@@ -25,7 +25,7 @@
 
 {% for req in supportreq %}
 
-{{ forloop.counter }}.<b>User:</b><i>{{ req.user }}</i><b><br> Request Appointment Date : </b> <i>{{ req.date_time }} </i> <b> Request Type : </b> <i> {{ req.request_type }} </i> <b> Status : </b> {{ req.request_closed }} <br><br>
+{{ forloop.counter }}.<b>User : </b><i>  {{ req.user }} </i><b><br> Request Appointment Date : </b> <i>{{ req.date_time }} </i> <b> Request Type : </b> <i> {{ req.request_type }} </i> <b> Status : </b> {{ req.request_closed }} <br><br>
 
 {% endfor %}
 
