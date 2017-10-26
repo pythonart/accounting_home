@@ -78,11 +78,32 @@ def businessRequestFormView(request):
 		form = BusinessRequestForm(request=request)
 	return render(request, 'business_request_form.html', {'form': form})
 
-
-class SupportRequestView(LoginRequiredMixin,CreateView):
-      model=Support_request
-      form_class=SupportReqForm
-      template_name='accountingbuddy/datepick.html'
+@login_required
+def supportRequestView(request):
+	to=[]
+	email_obj=SendMails.objects.all()
+	for item in email_obj:
+		to.append(item.email_id)
+	if request.method == 'POST':
+		form=SupportReqForm(request.POST,request.FILES)
+		if form.is_valid():
+			supportreq=form.save(commit=false)
+			supportreq.user=request.user
+			supportreq.save()
+			user=request.user
+			from_email='info@accountingbuddy.org'
+			subject="AccountingBuddy.Org Support Request Fm %s" % user.first_name
+			text_content="Appointment Date and Time : %s , Request Type: %s , Request Status: %s" % (supportreq.date_time ,supportreq.request_type,supportreq.request_closed)
+			html_content=" <h4>Support Request  </h4> <br> <ul><li> %s </li> <li> Appointment Date and Time : %s  </li> <li> Request Type: %s  </li> <li> Request Status: %s  </li> </ul>" % % (user.first_name,supportreq.date_time ,supportreq.request_type,supportreq.request_closed)
+			#to = ['keeganpatrao@gmail.com',]
+			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+			msg.attach_alternative(html_content, "text/html")	
+			msg.send()
+			return HttpResponseRedirect(reverse('accountingbuddy:thanks'))
+	else:
+		form = SupportReqForm()
+	return render(request, 'datepick.html', {'form': form})
+			
       
 
     
