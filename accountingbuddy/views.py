@@ -94,7 +94,7 @@ def supportRequestView(request):
 			from_email='info@accountingbuddy.org'
 			subject="AccountingBuddy.Org Support Request Fm %s" % user.first_name
 			text_content="Appointment Date and Time : %s , Request Type: %s , Request Status: %s" % (supportreq.date_time ,supportreq.request_type,supportreq.request_closed)
-			html_content=" <h4>Support Request  </h4> <br> <ul><li> %s </li> <li> Appointment Date and Time : %s  </li> <li> Request Type: %s  </li> <li> Request Status: %s  </li> </ul>" % % (user.first_name,supportreq.date_time ,supportreq.request_type,supportreq.request_closed)
+			html_content=" <h4>Support Request  </h4> <br> <ul><li> %s </li> <li> Appointment Date and Time : %s  </li> <li> Request Type: %s  </li> <li> Request Status: %s  </li> </ul>"  % (user.first_name,supportreq.date_time ,supportreq.request_type,supportreq.request_closed)
 			#to = ['keeganpatrao@gmail.com',]
 			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
 			msg.attach_alternative(html_content, "text/html")	
