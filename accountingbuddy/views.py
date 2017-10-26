@@ -79,7 +79,7 @@ def businessRequestFormView(request):
 	return render(request, 'business_request_form.html', {'form': form})
 
 @login_required
-def supportRequestView(request):
+def supportRequestCreate(request):
 	to=[]
 	email_obj=SendMails.objects.all()
 	for item in email_obj:
@@ -103,6 +103,11 @@ def supportRequestView(request):
 	else:
 		form = SupportReqForm()
 	return render(request, 'datepick.html', {'form': form})
+
+class SupportRequestView(DetailView):
+	model=Support_request
+	template_name='accountingbuddy/supportreq_detail.html'
+	context_object='supportreq'
 			
       
 
