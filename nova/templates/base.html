@@ -236,7 +236,7 @@
 <script src="{% static "js/jquery.ba-cond.min.js"%}"></script>
 <script src="{% static "js/jquery.slitslider.js"%}"></script>
 <!-- /Required javascript files for Slider -->
-
+   
 {% endcompress %}
 <!-- SL Slider -->
 <script type="text/javascript"> 
@@ -268,6 +268,13 @@ $(function() {
     })();
 
     Page.init();
+	
+             $('.datetimepicker12').datetimepicker({
+                   inline: true,
+                   sideBySide: true,
+                   format :"YYYY-MM-DD HH:mm:ss"
+               });		
+	
 });
 </script>
 <!-- /SL Slider -->
