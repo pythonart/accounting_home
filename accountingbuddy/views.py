@@ -87,7 +87,7 @@ def supportRequestView(request):
 	if request.method == 'POST':
 		form=SupportReqForm(request.POST,request.FILES)
 		if form.is_valid():
-			supportreq=form.save(commit=false)
+			supportreq=form.save(commit=False)
 			supportreq.user=request.user
 			supportreq.save()
 			user=request.user
