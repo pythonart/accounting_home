@@ -114,8 +114,13 @@ class SupportRequestView(LoginRequiredMixin,generic.ListView):
 			return Support_request.objects.all().order_by('date_time')
 		else :
 			return get_list_or_404(Support_request, user=self.request.user )
-
-			
+		
+ 
+class SupportRequestUpdateView(LoginRequiredMixin,UpdateView):
+	model=Support_request
+	form_class=SupportReqForm
+	template_name='datepick.html'
+	context_object_name='form'
       
 
     
