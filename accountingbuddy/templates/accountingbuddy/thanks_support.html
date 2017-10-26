@@ -1,0 +1,29 @@
+{% extends "nova/base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}{{ page.meta_title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+
+<h2> Your Support Request Has Been Received. We will contact you at your Chosen Date/Time </h2>
+<h3> If you wish to change your Appointment time. Please modify it from your Dashboard </h3>
+<h4> We lookforward to assist you </h4>
+
+
+{% endblock %}
