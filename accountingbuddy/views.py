@@ -107,7 +107,13 @@ def supportRequestCreate(request):
 class SupportRequestView(LoginRequiredMixin,generic.ListView):
 	model=Support_request
 	template_name='accountingbuddy/supportreq_detail.html'
-	context_object='supportreq'
+	context_object_name='supportreq'
+	
+	def get_queryset(self):
+		if self.request.user.is_staff:
+			return Support_request.objects.all().order_by('date_time')
+		else :
+			return get_list_or_404(Support_request, user=self.request.user )
 
 			
       
