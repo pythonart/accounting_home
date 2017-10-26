@@ -121,6 +121,7 @@ class SupportRequestUpdateView(LoginRequiredMixin,UpdateView):
 	form_class=SupportReqForm
 	template_name='datepick.html'
 	context_object_name='form'
+	success_url=reverse_lazy('accountingbuddy:support-req-view')
       
 
     
