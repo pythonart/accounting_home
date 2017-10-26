@@ -113,7 +113,7 @@ class SupportRequestView(LoginRequiredMixin,generic.ListView):
 		if self.request.user.is_staff:
 			return Support_request.objects.all().order_by('date_time')
 		else :
-			return get_list_or_404(Suppoer_request, user=self.request.user )
+			return get_list_or_404(Support_request, user=self.request.user )
 	
 	
 			
