@@ -11,7 +11,10 @@
     {{ form.non_form_errors }}  {# For fromset errors  #}
 
     <div  class="box-body">
-      <div class="form-group">  
+      <div class="form-group">
+             <div class="container">
+
+             
         <form enctype="multipart/form-data"  method="POST">
 
              {% csrf_token %}
@@ -35,8 +38,11 @@
                    format :"YYYY-MM-DD HH:mm:ss"
                });
            });
-       </script>       
-
+       </script>  
+             </div>        
+           </div>
+           </div?
+           
  {% endblock %}       
              
 
