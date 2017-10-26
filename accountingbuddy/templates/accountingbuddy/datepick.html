@@ -1,63 +1,43 @@
 
-    {% extends "nova/base.html" %}
-{% load mezzanine_tags keyword_tags %}
-
-{% block meta_title %}{{ page.meta_title }}{% endblock %}
-
-{% block meta_keywords %}{% metablock %}
-{% keywords_for page as keywords %}
-{% for keyword in keywords %}
-    {% if not forloop.first %}, {% endif %}
-    {{ keyword }}
-{% endfor %}
-{% endmetablock %}{% endblock %}
-
-{% block meta_description %}{% metablock %}
-{{ page.description }}
-{% endmetablock %}{% endblock %}
-
-{% block title %}
-{% editable page.title %}{{ page.title }}{% endeditable %}
-{% endblock %}
-
-{% block main %}
-
-{% load bootstrap3 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+       <html>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
               
-{% bootstrap_messages %}
-
-    {{ form.non_form_errors }}  {# For fromset errors  #}
-
-    <div  class="box-body">
-      <div class="form-group">  
-        <form enctype="multipart/form-data"  method="POST">
-
-             {% csrf_token %}
-               
-                    {% bootstrap_form form %}
-
-                  {% buttons %}
-
-              <button type="submit" value="Submit" class="btn btn-primary">
-            {% bootstrap_icon "star" %} Submit
-              </button> 
-                {% endbuttons %}
-       </form>
-          
-          
-          
-          
+              
+              <form enctype="multipart/form-data"  method="POST">
+       
+            <input type='hidden' name='csrfmiddlewaretoken' value='tQKu2a0mmMjzlLCY0QyEFuXpCBImXMKreNWnkJhxvG9jeM9S9kfRcwoAzfLP6wxW' />
+           <tr><th><label for="datetimepicker12">Enter Appointment Date/ Time:</label></th><td><ul class="errorlist"><li>Enter a valid date/time.</li></ul><input class="datetimepicker12" id="datetimepicker12" name="date_time" type="text" value="10/10/2017 12:00 PM" required /></td></tr>
+       <tr><th><label for="id_request_type">Request type:</label></th><td><select id="id_request_type" name="request_type" required>
+       <option value="">---------</option>
+       <option value="1">Initial Setup</option>
+       <option value="2">Need Help With Using</option>
+       <option value="3" selected="selected">Feed in my Invoices</option>
+       <option value="4">Audit Required</option>
+       <option value="5">Virtual CFO Required</option>
+       </select></td></tr>
+       <tr><th><label for="id_request_closed">Request Status:</label></th><td><select id="id_request_closed" name="request_closed" required>
+       <option value="OPEN" selected="selected">OPEN</option>
+       <option value="CLOSED">CLOSED</option>
+       </select></td></tr>
+           <input type="submit" value="Submit" />
+                  
+              </form>
           <script type="text/javascript">
-               $(function () { 
-                       $('.datetimepicker12').datetimepicker({
-                       inline: true,
-                       sideBySide: true,
-                       format :"YYYY-MM-DD HH:mm:ss"
-                   });
+           $(function () {
+               $('.datetimepicker12').datetimepicker({
+                   inline: true,
+                   sideBySide: true,
+                   format :"YYYY-MM-DD HH:mm:ss"
                });
-            </script>          
- 
+           });
+       </script>   
+       </html>
+       
 
-{% endblock %}
+
+
+       <script src="{% static "js/vendor/jquery-1.9.1.min.js"%}"></script>
