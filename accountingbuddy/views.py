@@ -116,13 +116,14 @@ class SupportRequestView(LoginRequiredMixin,generic.ListView):
 			return get_list_or_404(Support_request, user=self.request.user )
 		
  
-class SupportRequestUpdateView(PermissionRequiredMixin,UpdateView):
+class SupportRequestUpdateView(LoginRequiredMixin,UpdateView):
 	model=Support_request
-	permission_required='accountingbuddy.change_support_request'
 	form_class=SupportReqForm
 	template_name='datepick.html'
 	context_object_name='form'
 	success_url=reverse_lazy('accountingbuddy:support-req-view')
+	
+
       
 
     
