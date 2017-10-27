@@ -42,7 +42,7 @@ class CustomerDetails:
     findterm=findterm.strip()
     pattern='.*'+findterm+'.*'
     for item in self.customer_customfield_list:
-      match=re.match(pattern,item.name)
+      match=re.match(pattern,item.name, re.IGNORECASE )
       if match is not None:
         return item.value
     return None
