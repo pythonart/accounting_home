@@ -115,7 +115,7 @@ class SalesInvoice:
       return totalAmount
     
    @property
-   def salvesinv_customfield_list(self):
+   def salesinv_customfield_list(self):
       li=[]
       for item in self.customFields:
         c=CustomFieldsAll(self.custom_field_list).get_custom_field(item)
@@ -126,7 +126,7 @@ class SalesInvoice:
    def get_customfield_value(self,findterm):
       findterm=findterm.strip()
       pattern='.*'+findterm+'.*'
-      for item in self.salvesinv_customfield_list:
+      for item in self.salesinv_customfield_list:
         match=re.match(pattern,item.name, re.IGNORECASE )
         if match is not None:
           return item.value
