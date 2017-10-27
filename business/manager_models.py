@@ -1,4 +1,5 @@
 import re
+from dateutil import parser
 
 
 
@@ -12,8 +13,9 @@ class BusinessDetails:
     return self.tradingName
     
 class CustomerDetails:
-  def __init__(self,customer={},custom_field_list=None):
+  def __init__(self,customer={},custom_field_list=None,code=None):
     customer=customer
+    self.code=code
     self.custom_field_list=custom_field_list
     self.name=customer.get('Name',None)
     self.billingAddress=customer.get('BillingAddress',None)
@@ -46,7 +48,7 @@ class CustomerDetails:
       if match is not None:
         return item.value
     return None
-  
+
   def __str__(self):
     return self.name
   
@@ -69,8 +71,9 @@ class SupplierDetails:
     return self.name
 
 class SalesInvoice:
-   def __init__(self,salesinv={},taxli=None,custom_field_list=None):
+   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None):
       salesinv=salesinv
+      self.customer_obj_list=customer_obj_list
       self.custom_field_list=custom_field_list
       self.taxli=taxli
       self.issueDate=salesinv.get('IssueDate',None)
@@ -113,6 +116,29 @@ class SalesInvoice:
         for invLine in self.lines_list:
           totalAmount+=invLine.amt_aft_discount
       return totalAmount
+   
+   @property
+   def customer_gstin_no(self):
+      ''' Return customer GSTIN No'''
+      customer=CustomersAll(self.customer_obj_list).get_customer(self.to)
+      return customer.businessIdentifier
+   
+   @property
+   def invoice_pydatetime(self):
+      ''' Return invoice date in Python date time format for searching'''
+      dt=parser.parse(self.issueDate)
+      return dt
+   
+   @property
+   def invoice_date_gst_str(self):
+      ''' Return Invoice Date in GST Format'''
+      dt=self.invoice_pydatetime
+      return dt.strftime('%d-%b-%y')
+   
+   @property
+   def invoice_rate_tax_val_list(self):
+    ''' Returns a list containing tax and value grouping tax components of similar rate '''
+    pass
     
    @property
    def salesinv_customfield_list(self):
@@ -157,8 +183,7 @@ class SalesInvLine:
         taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
         amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
         return amt_before_tax
-      
-      
+     
       
    @property
    def amt_aft_discount(self):
@@ -213,7 +238,20 @@ class SalesInvLine:
               t.name=taxobj.name
               t.rate=taxobj.rate
               li.append(t)
-      return li 
+      return li
+   
+   @property
+   def tax_rate(self):
+      rate=0
+      for tax in self.tax_val_list:
+        rate+=tax.rate
+      return rate
+   
+   @property
+   def tax_name(self):
+      taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
+      return taxobj.name
+      
    
    @property
    def salvesInvLine_customfield_list(self):
@@ -359,9 +397,18 @@ class CustomFieldsAll:
       if item.code==code:
         return item
         break
-    return None 
-      
+    return None
+  
+class CustomersAll:
+  ''' Contains a list of all Customer Objects'''
+  def __init__(self,customer_obj_list):
+    self.customers=customer_obj_list
     
+  def get_customer(self,code):
+    for item in self.customers:
+        if item.code==code:
+          return item
+    return None
 
  
     
