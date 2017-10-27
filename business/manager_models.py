@@ -126,7 +126,7 @@ class SalesInvoice:
    def get_customfield_value(self,findterm):
       findterm=findterm.strip()
       pattern='.*'+findterm+'.*'
-      for item in self.customer_customfield_list:
+      for item in self.salvesinv_customfield_list:
         match=re.match(pattern,item.name, re.IGNORECASE )
         if match is not None:
           return item.value
@@ -227,7 +227,7 @@ class SalesInvLine:
    def get_customfield_value(self,findterm):
       findterm=findterm.strip()
       pattern='.*'+findterm+'.*'
-      for item in self.customer_customfield_list:
+      for item in self.salvesInvLine_customfield_list:
         match=re.match(pattern,item.name, re.IGNORECASE )
         if match is not None:
           return item.value
