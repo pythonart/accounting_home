@@ -97,7 +97,7 @@ class SalesInvoice:
    def lines_list(self):
       lines_list=[]
       for line in self.lines:
-        lines_list.append(SalesInvLine(line,self.amountsIncludeTax,self.taxli))
+        lines_list.append(SalesInvLine(line,self.amountsIncludeTax,self.taxli,self.custom_field_list))
       return lines_list
    
    @property
