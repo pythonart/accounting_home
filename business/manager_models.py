@@ -137,8 +137,16 @@ class SalesInvoice:
    
    @property
    def invoice_rate_tax_val_list(self):
-    ''' Returns a list containing tax and value grouping tax components of similar rate '''
-    pass
+      ''' Returns a list containing tax and value grouping tax components of similar rate '''
+      li=[]
+      for invoiceline in self.lines_list:
+        for taxoj in invoiceline.tax_val_list:
+          for item in li:
+            if item.rate==taxobj.rate:
+              item.value+=taxobj.value
+            else:
+              li.append(taxobj)
+      return li    
     
    @property
    def salesinv_customfield_list(self):
