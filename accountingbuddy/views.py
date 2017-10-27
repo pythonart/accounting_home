@@ -116,12 +116,24 @@ class SupportRequestView(LoginRequiredMixin,generic.ListView):
 			return get_list_or_404(Support_request, user=self.request.user )
 		
  
-class SupportRequestUpdateView(LoginRequiredMixin,UpdateView):
+class SupportRequestUpdateView(UserPassesTestMixin,UpdateView):
 	model=Support_request
 	form_class=SupportReqForm
 	template_name='datepick.html'
 	context_object_name='form'
 	success_url=reverse_lazy('accountingbuddy:support-req-view')
+	
+	def test_func(self):
+          if self.request.user.has_perm('accountingbuddy.change_Support_request'):
+              return True
+          if self.request.user.is_staff :
+              return True
+          else :
+                 req=get_object_or_404(Support_request, pk=self.kwargs['pk'])
+                 if req.user==self.request.user:
+                    return True
+                 else:
+                    return False
 	
 
       
