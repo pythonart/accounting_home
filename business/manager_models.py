@@ -87,7 +87,7 @@ class SalesInvoice:
       self.latePaymentFees=salesinv.get('LatePaymentFees',None)
       self.latePaymentFeesPercentage=salesinv.get('LatePaymentFeesPercentage',None)
       self.rounding=salesinv.get('Rounding',None)
-      self.customFields=salvesinv.get('CustomFields',None)
+      self.customFields=salesinv.get('CustomFields',None)
    
       
    def __str__(self):
