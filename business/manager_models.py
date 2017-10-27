@@ -69,8 +69,9 @@ class SupplierDetails:
     return self.name
 
 class SalesInvoice:
-   def __init__(self,salesinv={},taxli=None):
+   def __init__(self,salesinv={},taxli=None,custom_field_list=None):
       salesinv=salesinv
+      self.custom_field_list=custom_field_list
       self.taxli=taxli
       self.issueDate=salesinv.get('IssueDate',None)
       self.reference=salesinv.get('Reference',None)
@@ -86,6 +87,7 @@ class SalesInvoice:
       self.latePaymentFees=salesinv.get('LatePaymentFees',None)
       self.latePaymentFeesPercentage=salesinv.get('LatePaymentFeesPercentage',None)
       self.rounding=salesinv.get('Rounding',None)
+      self.customFields=salvesinv.get('CustomFields',None)
    
       
    def __str__(self):
@@ -111,10 +113,29 @@ class SalesInvoice:
         for invLine in self.lines_list:
           totalAmount+=invLine.amt_aft_discount
       return totalAmount
+    
+   @property
+   def salvesinv_customfield_list(self):
+      li=[]
+      for item in self.customFields:
+        c=CustomFieldsAll(self.custom_field_list).get_custom_field(item)
+        c.value=self.customFields[item]
+        li.append(c)
+      return li      
+    
+   def get_customfield_value(self,findterm):
+      findterm=findterm.strip()
+      pattern='.*'+findterm+'.*'
+      for item in self.customer_customfield_list:
+        match=re.match(pattern,item.name, re.IGNORECASE )
+        if match is not None:
+          return item.value
+      return None   
       
 class SalesInvLine:
    ''' A Object to store each line of a tax invoice. taxli is a list of all TaxCode objects'''
-   def __init__(self,line,amountsIncludeTax=None,taxli=None):
+   def __init__(self,line,amountsIncludeTax=None,taxli=None,custom_field_list=None):
+      self.custom_field_list=custom_field_list
       self.taxli=taxli #list of all taxobjects
       self.amountsIncludeTax=amountsIncludeTax
       self.description=line.get('Description',None)
@@ -193,7 +214,24 @@ class SalesInvLine:
               t.rate=taxobj.rate
               li.append(t)
       return li 
-       
+   
+   @property
+   def salvesInvLine_customfield_list(self):
+      li=[]
+      for item in self.customFields:
+        c=CustomFieldsAll(self.custom_field_list).get_custom_field(item)
+        c.value=self.customFields[item]
+        li.append(c)
+      return li      
+    
+   def get_customfield_value(self,findterm):
+      findterm=findterm.strip()
+      pattern='.*'+findterm+'.*'
+      for item in self.customer_customfield_list:
+        match=re.match(pattern,item.name, re.IGNORECASE )
+        if match is not None:
+          return item.value
+      return None    
           
    def __str__(self):
       return self.description
