@@ -20,7 +20,7 @@ for custom_field in customFields:
   
 cli=[]  # List of customer objects
 for customer in customers:
-  cli.append(CustomerDetails(customers[customer],custom_field_list))
+  cli.append(CustomerDetails(customers[customer],custom_field_list,customer))
   
 sinvli=[] # List of sales invoice objects
 for sinvoice in sinvoices:
