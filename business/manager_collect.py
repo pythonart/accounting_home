@@ -7,6 +7,7 @@ sinvoices=m.get_sales_invoices()
 tcodes=m.get_taxCodes()
 customers=m.get_customers()
 customFields=m.get_customfields()
+businessdetails=m.get_businessdetails()
 #suppliers=m.get_suppliers()
 
 taxli=[] #List of TaxCode objects
@@ -24,7 +25,10 @@ for customer in customers:
   
 sinvli=[] # List of sales invoice objects
 for sinvoice in sinvoices:
-  sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli))  
+  sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli))
+  
+
+
 
 
             
