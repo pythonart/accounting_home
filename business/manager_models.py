@@ -160,12 +160,12 @@ class SalesInvoice:
           else:
             return "b2cs"
           
-  @property
-  def gst_state_code(self):
-    customer_state_code=self.customer_gstin_no[:2]
-    for state in self.state_codes:
-      if state['codeNo']==customer_state_code:
-        return"%s-%s" % (state['codeNo'],state['name'])
+   @property
+   def gst_state_code(self):
+      customer_state_code=self.customer_gstin_no[:2]
+      for state in self.state_codes:
+        if state['codeNo']==customer_state_code:
+          return"%s-%s" % (state['codeNo'],state['name'])
    
   @property
   def own_gstin(self):
