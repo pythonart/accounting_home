@@ -111,8 +111,9 @@ class SupplierDetails:
     return self.name
 
 class SalesInvoice:
-   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None,state_codes=state_codes,own_gstin=None):
+   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None,state_codes=state_codes,own_gstin=None,businessDetails=None):
       salesinv=salesinv
+      self.businessDetails=businessDetails
       self.own_gstin=own_gstin
       self.state_codes=state_codes
       self.customer_obj_list=customer_obj_list
@@ -165,7 +166,11 @@ class SalesInvoice:
     for state in self.state_codes:
       if state['codeNo']==customer_state_code:
         return"%s-%s" % (state['codeNo'],state['name'])
-      
+   
+  @property
+  def own_gstin(self):
+    return self.businessDetails.businessIdentifier
+    
    
    @property
    def gst_intrastate(self):
@@ -232,7 +237,8 @@ class SalesInvoice:
         c=CustomFieldsAll(self.custom_field_list).get_custom_field(item)
         c.value=self.customFields[item]
         li.append(c)
-      return li      
+      return li
+    
     
    def get_customfield_value(self,findterm):
       findterm=findterm.strip()
@@ -495,5 +501,16 @@ class CustomersAll:
           return item
     return None
 
- 
+  
+class BusinessDetails:
+  '''Own Business Details'''
+  
+  def __init__(self,businessdetails={},code=None):
+    self.code=code
+    self.businessName=businessdetails.get('BusinessName',None)
+    self.businessContactInformation=businessdetails.get('BusinessContactInformation',None)
+    self.businessIdentifier=businessdetails.get('BusinessIdentifier',None)
     
+    
+    
+  
