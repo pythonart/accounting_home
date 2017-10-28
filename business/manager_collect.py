@@ -26,8 +26,10 @@ for customer in customers:
 sinvli=[] # List of sales invoice objects
 for sinvoice in sinvoices:
   sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli))
-  
 
+
+for busdetail in businessdetails:
+  businessDetails=BusinessDetails(businessdetails[busdetail],busdetail)
 
 
 
