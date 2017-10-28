@@ -1,6 +1,8 @@
 import re
 from dateutil import parser
 
+B2CS_CAP=250000
+
 
 
 class BusinessDetails:
@@ -103,6 +105,20 @@ class SalesInvoice:
         lines_list.append(SalesInvLine(line,self.amountsIncludeTax,self.taxli,self.custom_field_list))
       return lines_list
    
+   @property 
+   def gst_inv_type(self):
+      ''' Returns type of Invoice as per GST Format'''
+      if self.customer_gstin_no is not None:
+        return "b2b"
+      else:
+        if  self.totoalAmount > B2CS_CAP:
+          return "b2cl"
+   
+   @property
+   def gst_intrastate(self):
+      ''' Returns True or False if GST is from One State to Another'''
+       
+      
    @property
    def totalAmount(self):
       ''' Sum of Invoice Lines for (amt_aft_discount + tax.val for each tax from tax_val_list'''
@@ -121,8 +137,11 @@ class SalesInvoice:
    def customer_gstin_no(self):
       ''' Return customer GSTIN No'''
       customer=CustomersAll(self.customer_obj_list).get_customer(self.to)
-      return customer.businessIdentifier
-   
+      if customer.businessIdentifier!="":
+        return customer.businessIdentifier
+      else :
+        None
+        
    @property
    def invoice_pydatetime(self):
       ''' Return invoice date in Python date time format for searching'''
