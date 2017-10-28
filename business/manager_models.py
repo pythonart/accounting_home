@@ -175,7 +175,7 @@ class SalesInvoice:
    def gst_intrastate(self):
       ''' Returns True or False if GST is from One State to Another'''
       if self.customer_gstin_no is not None:
-        if self.own_gstin[:2]==self.customer_gstin[:2]:
+        if self.own_gstin[:2]==self.customer_gstin_no[:2]:
           return False
         else:
           return True
