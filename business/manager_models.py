@@ -167,9 +167,9 @@ class SalesInvoice:
         if state['codeNo']==customer_state_code:
           return"%s-%s" % (state['codeNo'],state['name'])
    
-  @property
-  def own_gstin(self):
-    return self.businessDetails.businessIdentifier
+   @property
+   def own_gstin(self):
+      return self.businessDetails.businessIdentifier
     
    
    @property
