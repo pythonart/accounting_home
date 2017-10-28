@@ -217,23 +217,40 @@ class SalesInvoice:
       return dt.strftime('%d-%b-%y')
    
    @property
-   def invoice_rate_tax_val_list(self):
-      ''' Returns a list containing tax and value grouping tax components of similar rate '''
+   def gst_tax_taxablevalue(self):
+      ''' Returns a list containing dicts with tax rate and taxable value.
+          after totaling the taxable value for similar tax rate.
+      '''
       li=[]
       for invoiceline in self.lines_list:
-        for taxobj in invoiceline.tax_val_list:
-          li.append(taxobj)
+        li.append({'rate':invoiceline.tax_rate,'taxablevalue':invoiceline.taxableValue})
+      for item in li:
+        print('li',item['rate'],item['taxablevalue'])
       nli=[]
       for item in li:
         if len(nli)==0:
           nli.append(item)
+          print('NLI was empty, appended',item['rate'],item['value'])
+          self.print_nli(nli)
         else:
-          for tax in nli:
-            if tax.rate==item.rate:
-              tax.value+=item.value
+          for obj in nli:
+            if obj['rate']==item['rate']:
+              print('OBJ in NlI Rate was Equat to ITEM')
+              print('OBJ rate and value',obj['rate'],obj['taxablevalue'])
+              obj['taxablevalue']+=item['taxablevalue']
+              print('after appending')
+              self.print_nli(nli)
             else:
+              print('Item rate found different')
               nli.append(item)
+              self.print_nli(nli)
       return nli
+    
+   def print_nli(nli)
+    for item in nli:
+      print('Printing NLI')
+      item['rate'],item['taxablevalue']
+       
               
    @property
    def salesinv_customfield_list(self):
