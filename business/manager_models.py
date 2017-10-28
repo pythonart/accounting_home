@@ -151,7 +151,7 @@ class SalesInvoice:
       if self.customer_gstin_no is not None:
         return "b2b"
       else:
-        if gst_intrastate is False:
+        if gst_intrastate is True:
           return "b2cs"
         else :
           if  self.totoalAmount > B2CS_CAP:
@@ -176,9 +176,9 @@ class SalesInvoice:
       ''' Returns True or False if GST is from One State to Another'''
       if self.customer_gstin_no is not None:
         if self.own_gstin[:2]==self.customer_gstin_no[:2]:
-          return False
-        else:
           return True
+        else:
+          return False
           
       
    @property
