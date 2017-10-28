@@ -3,7 +3,45 @@ from dateutil import parser
 
 B2CS_CAP=250000
 
-
+#State Codes
+state_codes={
+['name'='Andaman and Nicobar Islands','codeNo'='35','codeA'='AN'],
+['name'='Andhra Pradesh','codeNo'='37','codeA'='AD'],
+['name'='Arunachal Pradesh','codeNo'='12','codeA'='AR'],
+['name'='Assam','codeNo'='18','codeA'='AS'],
+['name'='Bihar','codeNo'='10','codeA'='BR'],
+['name'='Chandigarh','codeNo'='04','codeA'='CH'],  
+['name'='Chattisgarh','codeNo'='22','codeA'='CG'],
+['name'='Dadra and Nagar Haveli','codeNo'='26','codeA'='DN'],  
+['name'='Daman and Diu','codeNo'='25','codeA'='DD'],  
+['name'='Delhi','codeNo'='07','codeA'='DL'],
+['name'='Goa','codeNo'='30','codeA'='GA'], 
+['name'='Gujarat','codeNo'='24','codeA'='GJ'],  
+['name'='Haryana','codeNo'='06','codeA'='HR'],
+['name'='Himachal Pradesh','codeNo'='02','codeA'='HP'],
+['name'='Jammu and Kashmir','codeNo'='01','codeA'='JK'],
+['name'='Jharkhand','codeNo'='20','codeA'='JH'],
+['name'='Karnataka','codeNo'='29','codeA'='KA'],
+['name'='Kerala','codeNo'='32','codeA'='KL'],
+['name'='Lakshadweep Islands','codeNo'='31','codeA'='LD'],
+['name'='Madhya Pradesh','codeNo'='23','codeA'='MP'],
+['name'='Maharashtra','codeNo'='27','codeA'='MH'],
+['name'='Manipur','codeNo'='14','codeA'='MN'],
+['name'='Meghalaya','codeNo'='17','codeA'='ML'],
+['name'='Mizoram','codeNo'='15','codeA'='MZ'],
+['name'='Nagaland','codeNo'='13','codeA'='NL'],
+['name'='Odisha','codeNo'='21','codeA'='OD'], 
+['name'='Pondicherry','codeNo'='34','codeA'='PY'],   
+['name'='Punjab','codeNo'='03','codeA'='PB'],
+['name'='Rajasthan','codeNo'='08','codeA'='RJ'],
+['name'='Sikkim','codeNo'='11','codeA'='SK'],
+['name'='Tamil Nadu','codeNo'='33','codeA'='TN'],
+['name'='Telangana','codeNo'='36','codeA'='TS'], 
+['name'='Tripura','codeNo'='16','codeA'='TR'],
+['name'='Uttar Pradesh','codeNo'='09','codeA'='UP'],
+['name'='Uttarakhand','codeNo'='05','codeA'='UK'], 
+['name'='West Bengal','codeNo'='19','codeA'='WB'],  
+}
 
 class BusinessDetails:
   def __init__(self):
@@ -73,8 +111,10 @@ class SupplierDetails:
     return self.name
 
 class SalesInvoice:
-   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None):
+   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None,state_codes=state_codes,own_gstin=None):
       salesinv=salesinv
+      self.own_gstin=own_gstin
+      self.state_codes=state_codes
       self.customer_obj_list=customer_obj_list
       self.custom_field_list=custom_field_list
       self.taxli=taxli
@@ -111,13 +151,31 @@ class SalesInvoice:
       if self.customer_gstin_no is not None:
         return "b2b"
       else:
-        if  self.totoalAmount > B2CS_CAP:
-          return "b2cl"
+        if gst_intrastate is False:
+          return "b2cs"
+        else :
+          if  self.totoalAmount > B2CS_CAP:
+            return "b2cl"
+          else:
+            return "b2cs"
+          
+  @property
+  def gst_state_code(self):
+    customer_state_code=self.customer_gstin_no[:2]
+    for state in self.state_codes:
+      if state['codeNo']==customer_state_code:
+        return"%s-%s" % (state['codeNo'],state['name'])
+      
    
    @property
    def gst_intrastate(self):
       ''' Returns True or False if GST is from One State to Another'''
-       
+      if self.customer_gstin_no is not None:
+        if self.own_gstin[:2]==self.customer_gstin[:2]:
+          return False
+        else:
+          return True
+          
       
    @property
    def totalAmount(self):
