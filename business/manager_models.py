@@ -5,7 +5,7 @@ B2CS_CAP=250000
 
 #State Codes
 state_codes=[
-{'name'='Andaman and Nicobar Islands','codeNo'='35','codeA'='AN'},
+{'name':'Andaman and Nicobar Islands','codeNo':'35','codeA':'AN'},
 {'name'='Andhra Pradesh','codeNo'='37','codeA'='AD'},
 {'name'='Arunachal Pradesh','codeNo'='12','codeA'='AR'},
 {'name'='Assam','codeNo'='18','codeA'='AS'},
