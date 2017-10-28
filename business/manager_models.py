@@ -235,7 +235,7 @@ class SalesInvoice:
         else:
           for obj in nli:
             if obj['rate']==item['rate']:
-              print('OBJ in NlI Rate was Equat to ITEM')
+              print('obj rate=nli rate',obj['rate'],item['rate'])
               print('OBJ rate and value',obj['rate'],obj['taxablevalue'])
               obj['taxablevalue']+=item['taxablevalue']
               print('after appending')
@@ -249,7 +249,7 @@ class SalesInvoice:
    def print_nli(self,nli):
     for item in nli:
       print('Printing NLI')
-      item['rate'],item['taxablevalue']
+      print(item['rate'],item['taxablevalue'])
        
               
    @property
