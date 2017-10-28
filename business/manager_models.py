@@ -24,7 +24,7 @@ state_codes=[
 {'name':'Karnataka','codeNo':'29','codeA':'KA'},
 {'name':'Kerala','codeNo':'32','codeA':'KL'},
 {'name':'Lakshadweep Islands','codeNo':'31','codeA':'LD'},
-{'name':'Madhya Pradesh','codeNo':'23','codeA'=:'MP'},
+{'name':'Madhya Pradesh','codeNo':'23','codeA':'MP'},
 {'name':'Maharashtra','codeNo':'27','codeA':'MH'},
 {'name':'Manipur','codeNo':'14','codeA':'MN'},
 {'name':'Meghalaya','codeNo':'17','codeA':'ML'},
