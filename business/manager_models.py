@@ -111,10 +111,9 @@ class SupplierDetails:
     return self.name
 
 class SalesInvoice:
-   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None,state_codes=state_codes,own_gstin=None,businessDetails=None):
+   def __init__(self,salesinv={},taxli=None,custom_field_list=None,customer_obj_list=None,businessDetails=None,state_codes=state_codes,):
       salesinv=salesinv
       self.businessDetails=businessDetails
-      self.own_gstin=own_gstin
       self.state_codes=state_codes
       self.customer_obj_list=customer_obj_list
       self.custom_field_list=custom_field_list
