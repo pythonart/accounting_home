@@ -222,13 +222,19 @@ class SalesInvoice:
       li=[]
       for invoiceline in self.lines_list:
         for taxoj in invoiceline.tax_val_list:
-          for item in li:
-            if item.rate==taxobj.rate:
-              item.value+=taxobj.value
+          li.append(taxobj)
+      nli=[]
+      for item in li:
+        if len(nli)==0:
+          nli.append(item)
+        else:
+          for tax in nli:
+            if tax.rate==item.rate:
+              tax.value+=item.value
             else:
-              li.append(taxobj)
-      return li    
-    
+              nli.append(item)
+      return nli
+              
    @property
    def salesinv_customfield_list(self):
       li=[]
