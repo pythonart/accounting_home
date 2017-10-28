@@ -230,7 +230,7 @@ class SalesInvoice:
       for item in li:
         if len(nli)==0:
           nli.append(item)
-          print('NLI was empty, appended',item['rate'],item['value'])
+          print('NLI was empty, appended',item['rate'],item['taxablevalue'])
           self.print_nli(nli)
         else:
           for obj in nli:
