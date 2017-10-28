@@ -14,7 +14,9 @@ taxli=[] #List of TaxCode objects
 for tax in tcodes:
   taxli.append(TaxCode(tcodes[tax],tax))
 
-
+for busdetail in businessdetails:
+  businessDetails=BusinessDetails(businessdetails[busdetail],busdetail)
+  
 custom_field_list=[] #List of Custom Fields.
 for custom_field in customFields:
   custom_field_list.append(CustomField(customFields[custom_field],custom_field))  
@@ -25,11 +27,10 @@ for customer in customers:
   
 sinvli=[] # List of sales invoice objects
 for sinvoice in sinvoices:
-  sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli))
+  sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli,businessDetails,state_codes))
 
 
-for busdetail in businessdetails:
-  businessDetails=BusinessDetails(businessdetails[busdetail],busdetail)
+
 
 
 
