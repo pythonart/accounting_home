@@ -221,7 +221,7 @@ class SalesInvoice:
       ''' Returns a list containing tax and value grouping tax components of similar rate '''
       li=[]
       for invoiceline in self.lines_list:
-        for taxoj in invoiceline.tax_val_list:
+        for taxboj in invoiceline.tax_val_list:
           li.append(taxobj)
       nli=[]
       for item in li:
