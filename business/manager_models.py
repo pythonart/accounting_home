@@ -246,7 +246,7 @@ class SalesInvoice:
               self.print_nli(nli)
       return nli
     
-   def print_nli(nli)
+   def print_nli(nli):
     for item in nli:
       print('Printing NLI')
       item['rate'],item['taxablevalue']
