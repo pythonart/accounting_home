@@ -61,7 +61,7 @@ class CustomerDetails:
     self.billingAddress=customer.get('BillingAddress',None)
     self.email=customer.get('Email',None)
     self.businessIdentifier=customer.get('BusinessIdentifier',None)
-    self.code=customer.get('Code',None)
+    self.customer_code=customer.get('Code',None)
     self.startingBalanceType=customer.get('StartingBalanceType',None)
     self.telephone=customer.get('Telephone',None)
     self.fax=customer.get('Fax',None)
