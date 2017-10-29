@@ -187,12 +187,12 @@ class SalesInvoice:
       totalAmount=0
       if self.amountsIncludeTax is None:  
         for invLine in self.lines_list:
-          totalAmount+=invLine.amt_aft_discount
+          totalAmount+=(invLine.amt_aft_discount*invLine.qty)
           for taxobj in invLine.tax_val_list:
             totalAmount+=taxobj.value
       else:
         for invLine in self.lines_list:
-          totalAmount+=invLine.amt_aft_discount
+          totalAmount+=(invLine.amt_aft_discount*invLine.qty)
       return totalAmount
    
    @property
@@ -293,16 +293,16 @@ class SalesInvLine:
    def taxableValue(self):
       ''' Returns the taxable value depending of if tax is included or not.'''
       if self.amountsIncludeTax is None:
-        return self.amt_aft_discount
+        return (self.amt_aft_discount*self.qty)
       else:
         taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
         amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
-        return amt_before_tax
+        return (amt_before_tax*self.qty)
      
       
    @property
    def amt_aft_discount(self):
-      ''' Returns the amount after discount is applied. 
+      ''' Returns the amount after discount is applied. Per UNIT
       Note: When tax is included the unit rate shown in Invoice line amount is wrong.
       E.G self.amount=100 Rs , tax applied multi rate 6% (5.23 Rs) and 3% (2.61 Rs) , Total tax 7.84 Rs, Discount 5% Rs 5,
       Total Bill Amount after Tax is 95 Rs. Hence Actual Unit Price is 91.7 Rs After 5 Rs dicount its 87.15, Plus Tax 7.84
@@ -319,7 +319,7 @@ class SalesInvLine:
       is applied on the taxable amount. 
       taxobj contains a TaxCode object for the taxcode in the invoice line.
       A check is made to see if its a Multi Rate TaxCode.
-      
+      Qty is Multiplied here.
       '''
       li=[]
       taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
@@ -327,13 +327,13 @@ class SalesInvLine:
         if taxobj.taxcomp_exists is True: #If Multiple tax rates exist store value of each rate in a list and return it.
           for item in taxobj.taxcomp_list:
             t=InvoiceTaxValue()
-            t.value=(self.amt_aft_discount*item.rate)/100
+            t.value=((self.amt_aft_discount*item.rate)/100)*self.qty
             t.name=item.name
             t.rate=item.rate
             li.append(t)
         else:                             # if only single tax rate exists, take the value from TaxCode object and store it in list and return
             t=InvoiceTaxValue()
-            t.value=(self.amt_aft_discount*taxobj.rate)/100
+            t.value=((self.amt_aft_discount*taxobj.rate)/100)*self.qty
             t.name=taxobj.name
             t.rate=taxobj.rate
             li.append(t)
@@ -343,13 +343,13 @@ class SalesInvLine:
           if taxobj.taxcomp_exists is True:    # if Multiple Tax Rates exisit
             for item in taxobj.taxcomp_list:
               t=InvoiceTaxValue()
-              t.value=(amt_before_tax*item.rate)/100
+              t.value=((amt_before_tax*item.rate)/100)*self.qty
               t.name=item.name
               t.rate=item.rate
               li.append(t)
           else:
               t=InvoiceTaxValue()               #if Only Single tax rate exists.
-              t.value=(amt_before_tax*taxobj.rate)/100
+              t.value=((amt_before_tax*taxobj.rate)/100)*self.qty
               t.name=taxobj.name
               t.rate=taxobj.rate
               li.append(t)
