@@ -233,6 +233,7 @@ class SalesInvoice:
           print('NLI was empty, appended',item['rate'],item['taxablevalue'])
           self.print_nli(nli)
         else:
+          x=0
           for obj in nli:
             if obj['rate']==item['rate']:
               print('obj rate=nli rate',obj['rate'],item['rate'])
@@ -240,10 +241,11 @@ class SalesInvoice:
               obj['taxablevalue']+=item['taxablevalue']
               print('after appending')
               self.print_nli(nli)
-            else:
-              print('Item rate found different')
-              nli.append(item)
-              self.print_nli(nli)
+              x=1
+          if x!=1:
+            print('Item rate found different')
+            nli.append(item)
+            self.print_nli(nli)
       return nli
     
    def print_nli(self,nli):
