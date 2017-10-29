@@ -1,5 +1,7 @@
 import re
 from dateutil import parser
+from datetime import datetime
+from datetime import date
 
 B2CS_CAP=250000
 
@@ -535,6 +537,21 @@ class BusinessDetails:
     self.businessContactInformation=businessdetails.get('BusinessContactInformation',None)
     self.businessIdentifier=businessdetails.get('BusinessIdentifier',None)
     
+    
+class SalesInvList:
+  ''' A list of sales invoices searchable by dates'''
+  def __init__(self,sinvli):
+    self.sinvli=sinvli
+    
+  def filter_inv(self,from_date,to_date,inv_type):
+    retli=[]
+    fm_date=date(from_date) #Format should be (YYYY,M,DD)
+    to_date=date(to_date)
+    for inv in self.sinvli:
+      if inv.invoice_pydatetime > fm_date && inv.invoice_pydatetime <= to_date && inv.gst_inv_type==inv_type:
+        retli.append(inv)
+    return retli
+        
     
     
   
