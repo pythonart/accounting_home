@@ -313,7 +313,10 @@ class SalesInvLine:
       if self.discount is not None:
         return int(self.amount) -  ((int(self.amount)*int(self.discount))/100 )
       else :
-        return int(self.amount)
+        if self.amount is not None:
+          return int(self.amount)
+        else:
+          return None
   
    @property
    def tax_val_list(self):
