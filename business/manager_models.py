@@ -546,12 +546,8 @@ class SalesInvList:
   def filter_inv(self,from_date,to_date,inv_type):
     #from_date and to_date Format should be (YYYY,M,DD)
     retli=[]
-    fy,fm,fd=from_date.split(',')
-    ty,tm,td=to_date.split(',')
-    fy,fm,fd=int(fy),int(fm),int(fd)
-    ty,tm,td=int(ty),int(tm),int(td)
-    fm_date=date(fy,fm,fd) 
-    to_date=date(ty,tm,td)
+    fm_date=datetime.strptime(from_date,'"%d/%m/%y')
+    to_date=datetime.strptime(to_date,'"%d/%m/%y')
     for inv in self.sinvli:
       if inv.invoice_pydatetime >= fm_date and inv.invoice_pydatetime <= to_date and inv.gst_inv_type==inv_type:
         retli.append(inv)
