@@ -56,6 +56,42 @@ CGST_SGST_5_JSON={
   "TaxRateType": "MultiRate"
 }
 
+#CGST + SGST 18%
+CGST_SGST_5_CODE="7a1b5359-d919-4b1e-b830-e52ec686c39b"
+CGST_SGST_5_JSON={
+  "Name": " SGST 18%",
+  "Components": [
+    {
+      "Name": "SGST",
+      "Rate": 9.0
+    },
+    {
+      "Name": "CGST",
+      "Rate": 9.0
+    }
+  ],
+  "TaxRate": "CustomRate",
+  "TaxRateType": "MultiRate"
+}
+
+
+#CGST + SGST 28%
+CGST_SGST_5_CODE="488e249f-220d-4277-98a8-2f01335db583"
+CGST_SGST_5_JSON={
+  "Name": " SGST 28%",
+  "Components": [
+    {
+      "Name": "SGST",
+      "Rate": 14.0
+    },
+    {
+      "Name": "CGST",
+      "Rate": 14.0
+    }
+  ],
+  "TaxRate": "CustomRate",
+  "TaxRateType": "MultiRate"
+}
 
 
 
