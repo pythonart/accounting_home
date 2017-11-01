@@ -39,8 +39,8 @@ CGST_SGST_5_JSON={
 
 
 #CGST + SGST 12%
-CGST_SGST_5_CODE="b1a06a8e-b84f-4f7f-8c0f-4fae535d24c2"
-CGST_SGST_5_JSON={
+CGST_SGST_12_CODE="b1a06a8e-b84f-4f7f-8c0f-4fae535d24c2"
+CGST_SGST_12_JSON={
   "Name": " SGST 12%",
   "Components": [
     {
@@ -57,8 +57,8 @@ CGST_SGST_5_JSON={
 }
 
 #CGST + SGST 18%
-CGST_SGST_5_CODE="7a1b5359-d919-4b1e-b830-e52ec686c39b"
-CGST_SGST_5_JSON={
+CGST_SGST_18_CODE="7a1b5359-d919-4b1e-b830-e52ec686c39b"
+CGST_SGST_18_JSON={
   "Name": " SGST 18%",
   "Components": [
     {
@@ -76,8 +76,8 @@ CGST_SGST_5_JSON={
 
 
 #CGST + SGST 28%
-CGST_SGST_5_CODE="488e249f-220d-4277-98a8-2f01335db583"
-CGST_SGST_5_JSON={
+CGST_SGST_28_CODE="488e249f-220d-4277-98a8-2f01335db583"
+CGST_SGST_28_JSON={
   "Name": " SGST 28%",
   "Components": [
     {
@@ -92,6 +92,47 @@ CGST_SGST_5_JSON={
   "TaxRate": "CustomRate",
   "TaxRateType": "MultiRate"
 }
+
+
+#IGST 12%
+IGST_12_CODE="eb0d7e38-4787-4df4-8cd6-1708c82c91b6"
+IGST_12_JSON={
+  "Name": "IGST 12%",
+  "Components": [
+    {},
+    {}
+  ],
+  "Rate": 12.0,
+  "TaxRate": "CustomRate"
+}
+
+#IGST 3%
+IGST_3_CODE="e3172e58-57e1-4b01-900e-e5fd658c671f"
+IGST_3_JSON={
+  "Name": "IGST 3%",
+  "Components": [
+    {},
+    {}
+  ],
+  "Rate": 3.0,
+  "TaxRate": "CustomRate"
+}
+
+#IGST 5%
+IGST_5_CODE="90675cbb-0d8b-4be8-b4c6-ceb656a4905e"
+IGST_5_JSON={
+  "Name": "IGST 5%",
+  "Components": [
+    {},
+    {}
+  ],
+  "Rate": 5.0,
+  "TaxRate": "CustomRate"
+}
+
+
+
+
 
 
 
