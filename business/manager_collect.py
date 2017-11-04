@@ -22,12 +22,9 @@ taxli.append(TaxCode(CGST_SGST_28_JSON,CGST_SGST_28_CODE))
 taxli.append(TaxCode(IGST_0_JSON,IGST_0_CODE))
 taxli.append(TaxCode(IGST_3_JSON,IGST_3_CODE))
 taxli.append(TaxCode(IGST_5_JSON,IGST_5_CODE))
-taxli.append(TaxCode(IGST_0_JSON,IGST_0_CODE))
-taxli.append(TaxCode(IGST_0_JSON,IGST_0_CODE))
-
-
-
-  
+taxli.append(TaxCode(IGST_12_JSON,IGST_12_CODE))
+taxli.append(TaxCode(IGST_18_JSON,IGST_18_CODE))
+taxli.append(TaxCode(IGST_28_JSON,IGST_28_CODE)) 
 
 for busdetail in businessdetails:
   businessDetails=BusinessDetails(businessdetails[busdetail],busdetail)
