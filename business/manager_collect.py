@@ -17,9 +17,15 @@ for tax in tcodes:
 taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
 taxli.append(TaxCode(CGST_SGST_5_JSON,CGST_SGST_5_CODE))
 taxli.append(TaxCode(CGST_SGST_12_JSON,CGST_SGST_12_CODE))
-taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
-taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
-taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
+taxli.append(TaxCode(CGST_SGST_18_JSON,CGST_SGST_18_CODE))
+taxli.append(TaxCode(CGST_SGST_28_JSON,CGST_SGST_28_CODE))
+taxli.append(TaxCode(IGST_0_JSON,IGST_0_CODE))
+taxli.append(TaxCode(IGST_3_JSON,IGST_3_CODE))
+taxli.append(TaxCode(IGST_5_JSON,IGST_5_CODE))
+taxli.append(TaxCode(IGST_0_JSON,IGST_0_CODE))
+taxli.append(TaxCode(IGST_0_JSON,IGST_0_CODE))
+
+
 
   
 
