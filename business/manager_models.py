@@ -163,6 +163,8 @@ class SalesInvoice:
           
    @property
    def gst_state_code(self):
+      if self.customer_gstin_no is None:
+        return None
       customer_state_code=self.customer_gstin_no[:2]
       for state in self.state_codes:
         if state['codeNo']==customer_state_code:
@@ -181,6 +183,7 @@ class SalesInvoice:
           return True
         else:
           return False
+        
           
       
    @property
@@ -287,6 +290,8 @@ class SalesInvLine:
    @property
    def taxableValue(self):
       ''' Returns the taxable value depending of if tax is included or not.'''
+      if self.tax_val_list is None:
+        return 0
       if self.amountsIncludeTax is None:
         if self.qty is not None:
           return (self.amt_aft_discount*self.qty)
@@ -328,6 +333,8 @@ class SalesInvLine:
       Qty is Multiplied here.
       '''
       li=[]
+      if self.taxCode is None:
+        return None
       taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
       if self.amountsIncludeTax is None : # if Amounts Do not Include Tax 
         if taxobj.taxcomp_exists is True: #If Multiple tax rates exist store value of each rate in a list and return it.
@@ -379,12 +386,16 @@ class SalesInvLine:
    @property
    def tax_rate(self):
       rate=0
+      if self.tax_val_list is None:
+        return 0
       for tax in self.tax_val_list:
         rate+=tax.rate
       return rate
    
    @property
    def tax_name(self):
+      if self.tax_val_list is None:
+        return "No Tax Applied"
       taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
       return taxobj.name
       
