@@ -153,7 +153,7 @@ class SalesInvoice:
       if self.customer_gstin_no is not None:
         return "b2b"
       else:
-        if gst_intrastate is True:
+        if self.gst_intrastate is True:
           return "b2cs"
         else :
           if  self.totoalAmount > B2CS_CAP:
