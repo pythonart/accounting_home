@@ -1,5 +1,6 @@
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from business.manager_models import *
+from business.inbuilt_tax_codes import *
 
 m=manager_object(ROOT_URL,USER_NAME,business='Demo Company Indian GST')
 
@@ -13,6 +14,14 @@ businessdetails=m.get_businessdetails()
 taxli=[] #List of TaxCode objects
 for tax in tcodes:
   taxli.append(TaxCode(tcodes[tax],tax))
+taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
+taxli.append(TaxCode(CGST_SGST_5_JSON,CGST_SGST_5_CODE))
+taxli.append(TaxCode(CGST_SGST_12_JSON,CGST_SGST_12_CODE))
+taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
+taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
+taxli.append(TaxCode(CGST_SGST_3_JSON,CGST_SGST_3_CODE))
+
+  
 
 for busdetail in businessdetails:
   businessDetails=BusinessDetails(businessdetails[busdetail],busdetail)
