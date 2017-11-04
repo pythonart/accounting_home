@@ -282,7 +282,10 @@ class SalesInvLine:
         return (self.amt_aft_discount*self.qty)
       else:
         taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
-        amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
+        if taxobj.taxcomp_list_tax_rate_total is not None:
+          amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
+        else :
+          amt_before_tax=self.amt_aft_discount
         return (amt_before_tax*self.qty)
      
       
