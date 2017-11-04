@@ -231,7 +231,10 @@ class SalesInvoice:
       '''
       li=[]
       for invoiceline in self.lines_list:
-        li.append({'rate':invoiceline.tax_rate,'taxablevalue':invoiceline.taxableValue}) #Need to check for zero gst if taxablevalue is zero or invoice value.
+        if invoiceline.tax_rate!=0:
+          li.append({'rate':invoiceline.tax_rate,'taxablevalue':invoiceline.taxableValue}) #Need to check for zero gst if taxablevalue is zero or invoice value.
+        else :
+          li.append({'rate':invoiceline.tax_rate,'taxablevalue':0})   
       nli=[]
       for item in li:
         if len(nli)==0:
