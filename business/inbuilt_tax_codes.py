@@ -94,15 +94,15 @@ CGST_SGST_28_JSON={
 }
 
 
-#IGST 12%
-IGST_12_CODE="eb0d7e38-4787-4df4-8cd6-1708c82c91b6"
-IGST_12_JSON={
-  "Name": "IGST 12%",
+#IGST 0%
+IGST_0_CODE="69831b78-192c-4715-9129-9aafa64ccaa3"
+IGST_0_JSON={
+  "Name": "IGST 0%",
   "Components": [
     {},
     {}
   ],
-  "Rate": 12.0,
+  "Rate": 0.0,
   "TaxRate": "CustomRate"
 }
 
@@ -127,6 +127,44 @@ IGST_5_JSON={
     {}
   ],
   "Rate": 5.0,
+  "TaxRate": "CustomRate"
+}
+
+
+
+#IGST 12%
+IGST_12_CODE="eb0d7e38-4787-4df4-8cd6-1708c82c91b6"
+IGST_12_JSON={
+  "Name": "IGST 12%",
+  "Components": [
+    {},
+    {}
+  ],
+  "Rate": 12.0,
+  "TaxRate": "CustomRate"
+}
+
+#IGST 18%
+IGST_18_CODE="2b1096b2-d8af-4875-b48f-45faca996fc4"
+IGST_18_JSON={
+  "Name": "IGST 18%",
+  "Components": [
+    {},
+    {}
+  ],
+  "Rate": 18.0,
+  "TaxRate": "CustomRate"
+}
+
+#IGST 28%
+IGST_28_CODE="a7624309-3333-4249-baa4-f4abb5d9b71e"
+IGST_28_JSON={
+  "Name": "IGST 28%",
+  "Components": [
+    {},
+    {}
+  ],
+  "Rate": 28.0,
   "TaxRate": "CustomRate"
 }
 
