@@ -5,7 +5,10 @@ from business.inbuilt_tax_codes import *
 m=manager_object(ROOT_URL,USER_NAME,business='Demo Company Indian GST')
 
 sinvoices=m.get_sales_invoices()
-tcodes=m.get_taxCodes()
+try:
+  tcodes=m.get_taxCodes()
+except:
+  tcodes=[]
 customers=m.get_customers()
 customFields=m.get_customfields()
 businessdetails=m.get_businessdetails()
