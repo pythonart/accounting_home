@@ -189,12 +189,18 @@ class SalesInvoice:
       totalAmount=0
       if self.amountsIncludeTax is None:  
         for invLine in self.lines_list:
-          totalAmount+=(invLine.amt_aft_discount*invLine.qty)
+          if invLine.qty is not None:
+            totalAmount+=(invLine.amt_aft_discount*invLine.qty)
+          else:
+            totalAmount+=invLine.amt_aft_discount
           for taxobj in invLine.tax_val_list:
             totalAmount+=taxobj.value
       else:
         for invLine in self.lines_list:
-          totalAmount+=(invLine.amt_aft_discount*invLine.qty)
+          if invLine.qty is not None:
+            totalAmount+=(invLine.amt_aft_discount*invLine.qty)
+          else:
+            totalAmount+=invLine.amt_aft_discount
       return totalAmount
    
    @property
@@ -225,18 +231,18 @@ class SalesInvoice:
       '''
       li=[]
       for invoiceline in self.lines_list:
-        li.append({'rate':invoiceline.tax_rate,'taxablevalue':invoiceline.taxableValue})
+        li.append({'rate':invoiceline.tax_rate,'taxablevalue':invoiceline.taxableValue}) #Need to check for zero gst if taxablevalue is zero or invoice value.
       nli=[]
       for item in li:
         if len(nli)==0:
           nli.append(item)
         else:
-          x=0
+          x=0 # Assume item in li not in nli
           for obj in nli:
             if obj['rate']==item['rate']:
               obj['taxablevalue']+=item['taxablevalue']
-              x=1
-          if x!=1:
+              x=1   # Item in li found in nli with same tax rate, hence value added. 
+          if x!=1:  # Item in li does not match any tax rate in nli. Apped item to nli.
             nli.append(item)
       return nli
           
@@ -279,15 +285,20 @@ class SalesInvLine:
    def taxableValue(self):
       ''' Returns the taxable value depending of if tax is included or not.'''
       if self.amountsIncludeTax is None:
-        return (self.amt_aft_discount*self.qty)
+        if self.qty is not None:
+          return (self.amt_aft_discount*self.qty)
+        else:
+          return self.amt_aft_discount
       else:
         taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
-        if taxobj.taxcomp_list_tax_rate_total is not None:
+        if taxobj.taxcomp_list_tax_rate_total !=0:
           amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
         else :
           amt_before_tax=self.amt_aft_discount
-        return (amt_before_tax*self.qty)
-     
+        if self.qty is not None:  
+          return (amt_before_tax*self.qty)
+        else :
+          return amt_before_tax
       
    @property
    def amt_aft_discount(self):
@@ -303,7 +314,7 @@ class SalesInvLine:
         if self.amount is not None:
           return int(self.amount)
         else:
-          return None
+          return 0
   
    @property
    def tax_val_list(self):
@@ -319,29 +330,44 @@ class SalesInvLine:
         if taxobj.taxcomp_exists is True: #If Multiple tax rates exist store value of each rate in a list and return it.
           for item in taxobj.taxcomp_list:
             t=InvoiceTaxValue()
-            t.value=((self.amt_aft_discount*item.rate)/100)*self.qty
+            if item.rate ==0:   #For zero GST
+              t.value=0
+            else :
+              t.value=((self.amt_aft_discount*item.rate)/100)*self.qty
             t.name=item.name
             t.rate=item.rate
             li.append(t)
         else:                             # if only single tax rate exists, take the value from TaxCode object and store it in list and return
             t=InvoiceTaxValue()
-            t.value=((self.amt_aft_discount*taxobj.rate)/100)*self.qty
+            if taxobj.rate==0:  #For zero GST
+              t.value=0
+            else :  
+              t.value=((self.amt_aft_discount*taxobj.rate)/100)*self.qty
             t.name=taxobj.name
             t.rate=taxobj.rate
             li.append(t)
-      else:                                 #if Amounts  Include Tax then.
-          amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
+      else:#if Amounts  Include Tax then.
+          if taxobj.taxcomp_list_tax_rate_total !=0:
+            amt_before_tax=self.amt_aft_discount / (((taxobj.taxcomp_list_tax_rate_total)/100) + 1)
+          else :
+            amt_before_tax=self.amt_aft_discount
           taxVal=self.amt_aft_discount-amt_before_tax
           if taxobj.taxcomp_exists is True:    # if Multiple Tax Rates exisit
             for item in taxobj.taxcomp_list:
               t=InvoiceTaxValue()
-              t.value=((amt_before_tax*item.rate)/100)*self.qty
+              if item.rate==0:
+                t.value=0
+              else:  
+                t.value=((amt_before_tax*item.rate)/100)*self.qty
               t.name=item.name
               t.rate=item.rate
               li.append(t)
           else:
               t=InvoiceTaxValue()               #if Only Single tax rate exists.
-              t.value=((amt_before_tax*taxobj.rate)/100)*self.qty
+              if taxobj.rate==0:
+                t.value=0
+              else:  
+                t.value=((amt_before_tax*taxobj.rate)/100)*self.qty
               t.name=taxobj.name
               t.rate=taxobj.rate
               li.append(t)
