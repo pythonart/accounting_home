@@ -585,6 +585,30 @@ class SalesInvList:
         retli.append(inv)
     return retli
         
+class B2CLS_Output:
+  ''' Input will be a SalesInvList filtered for Date and Inv Type containing only b2cls '''
+  def __init__(self,retli):
+    li=[{'rate':k,'taxablevalue':0} for k in range(1,28)]
+    for invoice in retli:
+      for line in invoice.gst_tax_taxablevalue:
+        for tax in li:
+          if tax['rate']==line['rate']:
+            tax['taxablevalue']+=line['taxablevalue']
+    nli=[]
+    for item in li:
+      if item.taxablevalue!=0:
+        nli.append(item)
+    return nli
+        
+          
+      
+      
+       
     
+
+            
+          
+        
+      
     
   
