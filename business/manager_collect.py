@@ -78,11 +78,7 @@ class GstBusiness:
       for state in self.state_codes:
         if state['codeNo']==customer_state_code:
           return"%s-%s" % (state['codeNo'],state['name'])
-      for invoice in invoices:
         
-      
-      
-    
     return response
       
       
