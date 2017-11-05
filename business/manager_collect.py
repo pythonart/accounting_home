@@ -51,6 +51,7 @@ class GstBusiness:
     self.inv_type=inv_type
     
   def  gstOffline(self):
+    '''For Govt Offline too  Return Response as a Django object. For Any other type of response rewrite to output csv file. '''
     response = HttpResponse(content_type='text/csv')
     
     if self.inv_type=='b2b':
@@ -59,7 +60,15 @@ class GstBusiness:
       for invoice in self.gst_invoices:
         for line in invoice.gst_tax_taxablevalue:
           writer.writerow([invoice.customer_gstin_no,invoice.reference,invoice.invoice_date_gst_str,invoice.totalAmount,invoice.gst_state_code,invoice.get_customfield_value('Reverse Charges'), invoice.get_customfield_value('Invoice Type'),' ',line['rate'],line['taxablevalue'] ])
-    print(response.__dict__)
+    #print(response.__dict__)
+    
+    if self.inv_type=='b2cl':
+      response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
+      writer = csv.writer(response)
+      for invoice in self.gst_invoices:
+        for line in invoice.gst_tax_taxablevalue:
+          writer.writerow([invoice.reference,invoice.invoice_date_gst_str,invoice.totalAmount,invoice.gst_state_code,line['rate'],line['taxablevalue'],'','' ])
+    
     return response
       
       
