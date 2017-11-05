@@ -581,6 +581,9 @@ class SalesInvList:
 class B2CLS_Output:
   ''' Input will be a SalesInvList filtered for Date and Inv Type containing only b2cls '''
   def __init__(self,retli):
+    self.retli=retli
+    
+  def b2cl_str(self):
     li=[{'rate':k,'taxablevalue':0} for k in range(1,28)]
     for invoice in retli:
       for line in invoice.gst_tax_taxablevalue:
