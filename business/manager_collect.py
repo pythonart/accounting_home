@@ -1,8 +1,10 @@
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from business.manager_models import *
 from business.inbuilt_tax_codes import *
+import csv
+from django.http import HttpResponse
 
-class gst_business:
+class GstBusiness:
   def __init__(self,fm_date,to_date,inv_type,business='Demo Company Indian GST'):
     m=manager_object(ROOT_URL,USER_NAME,business=business)
     sinvoices=m.get_sales_invoices()
@@ -45,7 +47,23 @@ class gst_business:
     for sinvoice in sinvoices:
       sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli,businessDetails,state_codes))
       
-    self.sinvli=sinvli
+    self.gst_invoices=SalesInvList(sinvli).filter_inv(fm_date,to_date,inv_type)
+    self.inv_type=inv_type
+    
+  def  gstOffline(self):
+    response = HttpResponse(content_type='text/csv')
+    
+    if inv_type='b2b':
+      response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
+      writer = csv.writer(response)
+      for invoice in self.gst_invoices:
+        for line in invoice.gst_tax_taxablevalue:
+          writer.writerow([invoice.customer_gstin_no,invoice.reference,invoice.invoice_date_gst_str,invoice.totalAmount,invoice.gst_state_code,invoice.get_customfield_value('Reverse Charges'), invoice.get_customfield_value('Invoice Type'),' ',line['rate'],line['taxablevalue'] ])
+    print(response)  
+      
+      
+      
+     
     
       
       
