@@ -69,6 +69,20 @@ class GstBusiness:
         for line in invoice.gst_tax_taxablevalue:
           writer.writerow([invoice.reference,invoice.invoice_date_gst_str,invoice.totalAmount,invoice.gst_state_code,line['rate'],line['taxablevalue'],'','' ])
     
+    if self.inv_type=='b2cs':
+      response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
+      writer = csv.writer(response)
+      invoices=B2CLS_Output(self.gst_invoices)
+      businessDetails=BusinessDetails
+      own_state_code=self.customer_gstin_no[:2]
+      for state in self.state_codes:
+        if state['codeNo']==customer_state_code:
+          return"%s-%s" % (state['codeNo'],state['name'])
+      for invoice in invoices:
+        
+      
+      
+    
     return response
       
       
