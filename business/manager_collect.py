@@ -45,6 +45,9 @@ class gst_business:
     for sinvoice in sinvoices:
       sinvli.append(SalesInvoice(sinvoices[sinvoice],taxli,custom_field_list,cli,businessDetails,state_codes))
       
+    self.sinvli=sinvli
+    
+      
       
 
 
