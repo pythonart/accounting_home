@@ -3,8 +3,8 @@ from business.manager_models import *
 from business.inbuilt_tax_codes import *
 
 class gst_business:
-  def __init__(self,business,fm_date,to_date,inv_type):
-    m=manager_object(ROOT_URL,USER_NAME,business='Demo Company Indian GST')
+  def __init__(self,business='Demo Company Indian GST',fm_date,to_date,inv_type):
+    m=manager_object(ROOT_URL,USER_NAME,business=business)
     sinvoices=m.get_sales_invoices()
     try:
       tcodes=m.get_taxCodes()
