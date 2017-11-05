@@ -49,6 +49,7 @@ class GstBusiness:
       
     self.gst_invoices=SalesInvList(sinvli).filter_inv(fm_date,to_date,inv_type)
     self.inv_type=inv_type
+    self.businessDetails=businessDetails
     
   def  gstOffline(self):
     '''For Govt Offline too  Return Response as a Django object. For Any other type of response rewrite to output csv file. '''
@@ -73,11 +74,12 @@ class GstBusiness:
       response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
       writer = csv.writer(response)
       invoices=B2CLS_Output(self.gst_invoices)
-      businessDetails=BusinessDetails
-      own_state_code=self.customer_gstin_no[:2]
-      for state in self.state_codes:
-        if state['codeNo']==customer_state_code:
-          return"%s-%s" % (state['codeNo'],state['name'])
+      own_state_code=self.businessDetails.businessIdentifier[:2]
+      for state in state_codes:
+        if state['codeNo']==own_state_code:
+           own_state_gst_str="%s-%s" % (state['codeNo'],state['name'])
+      for invoice in invoices:
+        writer.writerow(['OE',own_state_gst_str,invoice['rate'],invoice['taxablevalue'],'',''])           
         
     return response
       
