@@ -585,7 +585,7 @@ class B2CLS_Output:
     
   def b2cl_str(self):
     li=[{'rate':k,'taxablevalue':0} for k in range(1,28)]
-    for invoice in retli:
+    for invoice in self.retli:
       for line in invoice.gst_tax_taxablevalue:
         for tax in li:
           if tax['rate']==line['rate']:
