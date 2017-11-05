@@ -59,7 +59,8 @@ class GstBusiness:
       for invoice in self.gst_invoices:
         for line in invoice.gst_tax_taxablevalue:
           writer.writerow([invoice.customer_gstin_no,invoice.reference,invoice.invoice_date_gst_str,invoice.totalAmount,invoice.gst_state_code,invoice.get_customfield_value('Reverse Charges'), invoice.get_customfield_value('Invoice Type'),' ',line['rate'],line['taxablevalue'] ])
-    print(response)  
+    print(response.__dict__)
+    return response
       
       
       
