@@ -53,7 +53,7 @@ class GstBusiness:
   def  gstOffline(self):
     response = HttpResponse(content_type='text/csv')
     
-    if inv_type=='b2b':
+    if self.inv_type=='b2b':
       response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
       writer = csv.writer(response)
       for invoice in self.gst_invoices:
