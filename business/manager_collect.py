@@ -50,6 +50,7 @@ class GstBusiness:
     self.gst_invoices=SalesInvList(sinvli).filter_inv(fm_date,to_date,inv_type)
     self.inv_type=inv_type
     self.businessDetails=businessDetails
+    self.sinvli=sinvli
     
   def  gstOffline(self):
     '''For Govt Offline too  Return Response as a Django object. For Any other type of response rewrite to output csv file. '''
