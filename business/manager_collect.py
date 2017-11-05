@@ -2,7 +2,7 @@ from business.managerapi import manager_browser, manager_object, USER_NAME,PASSW
 from business.manager_models import *
 from business.inbuilt_tax_codes import *
 
-Class gst_business:
+class gst_business:
   def __init__(self,business,fm_date,to_date,inv_type):
     m=manager_object(ROOT_URL,USER_NAME,business='Demo Company Indian GST')
     sinvoices=m.get_sales_invoices()
