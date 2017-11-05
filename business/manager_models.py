@@ -183,6 +183,8 @@ class SalesInvoice:
           return True
         else:
           return False
+      else:
+        None
         
           
       
@@ -279,7 +281,7 @@ class SalesInvLine:
       self.amountsIncludeTax=amountsIncludeTax
       self.description=line.get('Description',None)
       self.account=line.get('Account',None)
-      self.taxCode=line.get('TaxCode',None)
+      self.taxCode=line.get('TaxCode','69831b78-192c-4715-9129-9aafa64ccaa3') #If not tax assign GST zero
       self.qty=line.get('Qty',None)
       self.item=line.get('Item',None)
       self.amount=line.get('Amount',None)
