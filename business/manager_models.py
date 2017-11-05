@@ -45,14 +45,7 @@ state_codes=[
 {'name':'West Bengal','codeNo':'19','codeA':'WB'},  
 ]
 
-class BusinessDetails:
-  def __init__(self):
-    self.tradingName=tradingName
-    self.contactDetails=contactDetails
-    self.businessIdentifier=businessIdentifier
-    
-  def __str__(self):
-    return self.tradingName
+
     
 class CustomerDetails:
   def __init__(self,customer={},custom_field_list=None,code=None):
