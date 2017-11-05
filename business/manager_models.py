@@ -596,7 +596,7 @@ class B2CLS_Output:
             tax['taxablevalue']+=line['taxablevalue']
     nli=[]
     for item in li:
-      if item.taxablevalue!=0:
+      if item['taxablevalue']!=0:
         nli.append(item)
     return nli
         
