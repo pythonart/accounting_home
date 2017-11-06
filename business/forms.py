@@ -8,6 +8,9 @@ class BusinessCreateForm(ModelForm):
   class Meta:
     model=Business
     fields=['name']
+    
+class GstOffLineGenForm(forms.Form):
+  pass
 
   
       
