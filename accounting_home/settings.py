@@ -370,4 +370,4 @@ EMAIL_HOST_USER='info@accountingbuddy.org'
 #EMAIL_HOST_PASSWORD='password'  Refer local settings
 EMAIL_USE_TLS=True
 
-
+SITE_TITLE='AccountingBuddy'
