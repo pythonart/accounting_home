@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 from .models import  Business, MyProfile
 
-MONTH_CHOICES=[('JAN','1'),('
+#MONTH_CHOICES=[('JAN','1'),('
 
 class BusinessCreateForm(ModelForm):
   class Meta:
@@ -12,9 +12,10 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  q=MyProfile.objects.all()
+  pass
+  '''q=MyProfile.objects.all()
   business=forms.ModelChoiceField(queryset=q, empty_label=None)
-  month=forms.MultipleChoiceField(choice=MONTH_CHOICES)
+  month=forms.MultipleChoiceField(choice=MONTH_CHOICES)'''
 
   
       
