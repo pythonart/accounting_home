@@ -72,7 +72,9 @@ def GstOffLineView(request):
     if form.is_valid():
       print(request.POST)
       business_form=form.cleaned_data['business']
-      business=Business
+      business=Business.objects.get(id=business_form)
+      response=GstBusiness(business=business.name).gstOffline()
+      return response
   else:
     form=GstOffLineGenForm()
   return render(request,'form.html',{'form':form}) 
