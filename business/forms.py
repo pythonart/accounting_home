@@ -1,10 +1,15 @@
 from django import forms
 from django.forms import ModelForm 
 from django.core.exceptions import ValidationError
+import calendar
 
+
+from accountingbuddy.models import   MyProfile 
 from .models import  Business
 
-#MONTH_CHOICES=[('JAN','1'),('
+MONTH_CHOICES=[(str(k),calendar.month_abbr[k]) for k in range(1,13)]
+YEAR_CHOICES==[(str(k),str(k)) for k in range(2015,2051)]
+#[(1, 'Jan'), (2, 'Feb'), (3, 'Mar'), (4, 'Apr'), (5, 'May'), (6, 'Jun'), (7, 'Jul'), (8, 'Aug'), (9, 'Sep'), (10, 'Oct'), (11, 'Nov'), (12, 'Dec')]
 
 class BusinessCreateForm(ModelForm):
   class Meta:
@@ -12,10 +17,18 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  pass
-  '''q=MyProfile.objects.all()
+  q=MyProfile.objects.all()
   business=forms.ModelChoiceField(queryset=q, empty_label=None)
-  month=forms.MultipleChoiceField(choice=MONTH_CHOICES)'''
+  month=forms.MultipleChoiceField(label='Select Month',choice=MONTH_CHOICES)
+  year=forms.MultipleChoiceField(label='Select Year',choice=YEAR_CHOICES)
+  
+  def__int__(self,*args,**kwargs):
+    self.request = kwargs.pop('request',None)
+    super(GstOffLineGenForm,self).__init__(*args,**kwargs)
+    select_user=MyProfile.objects.get(user=self.request.user)
+    q=MyProfile.objects.all().filter(user=select_user.id)
+    self.fields['business'].queryset=q
+      
 
   
       
