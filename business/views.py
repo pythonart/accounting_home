@@ -22,7 +22,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
 from business.models import Business
-from business.forms import BusinessCreateForm
+from business.forms import BusinessCreateForm, GstOffLineGenForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from accountingbuddy.models import MyProfile
@@ -63,7 +63,11 @@ class BusinessListView(LoginRequiredMixin, generic.ListView):
     else:
       return get_list_or_404(Business,user=self.request.user)
   
-    
+@login_required
+def GstOffLineView(request):
+  if request.method=='POST':
+    form=GstOffLineGenForm(
+  
     
   
   
