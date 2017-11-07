@@ -26,6 +26,8 @@ from business.forms import BusinessCreateForm, GstOffLineGenForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from accountingbuddy.models import MyProfile
+from business.manager_collect import *
+
   
 @login_required  
 def BusinessCreateView(request):
@@ -68,7 +70,9 @@ def GstOffLineView(request):
   if request.method=="POST":
     form=GstOffLineGenForm(request.POST,request.FILES)
     if form.is_valid():
-      print(request.POST)      
+      print(request.POST)
+      business_form=form.cleaned_data['business']
+      business=Business
   else:
     form=GstOffLineGenForm()
   return render(request,'form.html',{'form':form}) 
