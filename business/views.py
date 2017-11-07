@@ -80,7 +80,7 @@ def GstOffLineView(request):
       from_date=str(1)+'/'+str(month)+'/'+str(year)
       k,v=calendar.monthrange(year,month)
       to_date=str(v)+'/'+str(month)+'/'+str(year)
-      business=Business.objects.get(id=business_form)
+      business=Business.objects.get(id=business_form.id)
       response=GstBusiness(fm_date=from_date,to_date=to_date,inv_type=invoice_type,business=business.name).gstOffline()
       return response
   else:
