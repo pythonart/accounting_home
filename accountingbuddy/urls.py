@@ -13,5 +13,6 @@ url(r'^thankyou/$',TemplateView.as_view(template_name='thanks.html'),name='thank
 url(r'^thankyou/support$',TemplateView.as_view(template_name='thanks_support.html'),name='thanks_support'),
 url(r'^supportrequest/create/$',views.supportRequestCreate,name='suppport-req'),
 url(r'^supportrequest/view/$',views.SupportRequestView.as_view(),name='support-req-view'),
-url(r'^supportrequest/update/(?P<pk>[0-9]+)/$',views.SupportRequestUpdateView.as_view(),name='support-req-update'),  
+url(r'^supportrequest/update/(?P<pk>[0-9]+)/$',views.SupportRequestUpdateView.as_view(),name='support-req-update'),
+url(r'^advert/$',views.AdvertView, name='advert'),  
 ]
