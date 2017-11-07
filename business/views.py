@@ -83,7 +83,7 @@ def GstOffLineView(request):
       response=GstBusiness(fm_date=from_date,to_date=to_date,inv_type=invoice_type,business=business.name).gstOffline()
       return response
   else:
-    form=GstOffLineGenForm()
+    form=GstOffLineGenForm(request)
   return render(request,'business/form.html',{'form':form}) 
     
   
