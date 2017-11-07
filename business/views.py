@@ -72,8 +72,8 @@ def GstOffLineView(request):
     form=GstOffLineGenForm(request.POST,request.FILES)
     if form.is_valid():
       business_form=form.cleaned_data['business']
-      month=form.cleaned_data['month']
-      year=form.cleaned_data['year']
+      int(month)=form.cleaned_data['month']
+      int(year)=form.cleaned_data['year']
       invoice_type=form.cleaned_data['invoice_type']
       from_date=str(1)+'/'+str(month)+'/'+str(year)
       k,v=calendar.monthrange(year,month)
