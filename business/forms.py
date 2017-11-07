@@ -8,7 +8,6 @@ from accountingbuddy.models import   MyProfile
 from business.models import Business
 from .models import  Business
 
-a=Business.objects.all()
 
 MONTH_CHOICES=[(str(k),calendar.month_abbr[k]) for k in range(1,13)]
 YEAR_CHOICES=[(str(k),str(k)) for k in range(2015,2051)]
@@ -21,7 +20,8 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  business=forms.ModelChoiceField(queryset=a, empty_label=None)
+  q=Business.objects.all()
+  business=forms.ModelChoiceField(queryset=q, empty_label=None)
   month=forms.ChoiceField(label='Select Month',choices=MONTH_CHOICES)
   year=forms.ChoiceField(label='Select Year',choices=YEAR_CHOICES)
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
