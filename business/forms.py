@@ -20,8 +20,8 @@ class BusinessCreateForm(ModelForm):
 class GstOffLineGenForm(forms.Form):
   q=Business.objects.all()
   business=forms.ModelChoiceField(queryset=q, empty_label=None)
-  month=forms.MultipleChoiceField(label='Select Month',choices=MONTH_CHOICES)
-  year=forms.MultipleChoiceField(label='Select Year',choices=YEAR_CHOICES)
+  month=forms.ChoiceField(label='Select Month',choices=MONTH_CHOICES)
+  year=forms.ChoiceField(label='Select Year',choices=YEAR_CHOICES)
   
   def __int__(self,*args,**kwargs):
     self.request = kwargs.pop('request',None)
