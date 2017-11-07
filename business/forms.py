@@ -20,8 +20,7 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  q=Business.objects.all()
-  business=forms.ModelChoiceField(queryset=q, empty_label=None)
+  business=forms.ModelChoiceField(queryset=None, empty_label=None)
   month=forms.ChoiceField(label='Select Month',choices=MONTH_CHOICES)
   year=forms.ChoiceField(label='Select Year',choices=YEAR_CHOICES)
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
