@@ -77,7 +77,7 @@ def GstOffLineView(request):
       return response
   else:
     form=GstOffLineGenForm()
-  return render(request,'form.html',{'form':form}) 
+  return render(request,'business/form.html',{'form':form}) 
     
   
   
