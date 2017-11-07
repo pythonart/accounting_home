@@ -27,6 +27,7 @@ from business.forms import BusinessCreateForm, GstOffLineGenForm
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from accountingbuddy.models import MyProfile
 from business.manager_collect import *
+import calendar
 
   
 @login_required  
@@ -72,8 +73,14 @@ def GstOffLineView(request):
     if form.is_valid():
       print(request.POST)
       business_form=form.cleaned_data['business']
+      month=form.cleaned_data['month']
+      year=form.cleaned_data['year']
+      invoice_type=form.cleaned_data['invoice_type']
+      from_date=str(1)+'/'+str(month)+'/'+str(year)
+      k,v=calendar.monthrange(year,month)
+      to_date=str(v)+'/'+str(month)+'/'+str(year)
       business=Business.objects.get(id=business_form)
-      response=GstBusiness(business=business.name).gstOffline()
+      response=GstBusiness(fm_date=from_date,to_date=to_date,inv_type=invoice_type,business=business.name).gstOffline()
       return response
   else:
     form=GstOffLineGenForm(request=request)
