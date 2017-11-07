@@ -65,7 +65,7 @@ class BusinessListView(LoginRequiredMixin, generic.ListView):
     else:
       return get_list_or_404(Business,user=self.request.user)
   
-@login_required
+#@login_required
 def GstOffLineView(request):
   if request.method=="POST":
     form=GstOffLineGenForm(request.POST,request.FILES)
