@@ -20,16 +20,16 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  a=Business.objects.all()
-  business=forms.ModelChoiceField(queryset=a, empty_label=None)
+  #a=Business.objects.all()
+  business=forms.ModelChoiceField(queryset=None, empty_label=None)
   month=forms.ChoiceField(label='Select Month',choices=MONTH_CHOICES)
   year=forms.ChoiceField(label='Select Year',choices=YEAR_CHOICES)
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
   
   def __init__(self, *args, **kwargs):
     #self.request = kwargs.pop('request',None)
-    super(GstOffLineGenForm , self).__init__(*args,**kwargs)
     q=Business.objects.all()
+    super(GstOffLineGenForm , self).__init__(*args,**kwargs)
     self.fields['business'].queryset=q
     '''
     if self.request.user.is_staff:
