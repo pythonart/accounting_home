@@ -22,7 +22,7 @@ class GstOffLineGenForm(forms.Form):
   month=forms.MultipleChoiceField(label='Select Month',choice=MONTH_CHOICES)
   year=forms.MultipleChoiceField(label='Select Year',choice=YEAR_CHOICES)
   
-  def__int__(self,*args,**kwargs):
+  def __int__(self,*args,**kwargs):
     self.request = kwargs.pop('request',None)
     super(GstOffLineGenForm,self).__init__(*args,**kwargs)
     select_user=MyProfile.objects.get(user=self.request.user)
