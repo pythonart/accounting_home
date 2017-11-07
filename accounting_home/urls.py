@@ -7,7 +7,7 @@ from django.views.i18n import set_language
 
 from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
-
+import debug_toolbar
 
 admin.autodiscover()
 
@@ -82,6 +82,7 @@ urlpatterns += [
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
+    url(r'^__debug__/', include(debug_toolbar.urls)),
     url("^accountingbuddy/",include('accountingbuddy.urls')),
     url("^dashboard/",include('business.urls')),
     url("^", include("mezzanine.urls")),
