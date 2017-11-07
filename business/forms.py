@@ -29,12 +29,14 @@ class GstOffLineGenForm(forms.Form):
   def __int__(self,*args,**kwargs):
     self.request = kwargs.pop('request',None)
     super(GstOffLineGenForm,self).__init__(*args,**kwargs)
+    '''
     if self.request.user.is_staff:
       q=Business.objects.all()
     else:
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user)
-    self.fields['business'].queryset=q
+    '''  
+    self.fields['business'].queryset=MyProfile.objects.all()
    
 
   
