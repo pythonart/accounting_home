@@ -20,14 +20,17 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  business=forms.ModelChoiceField(queryset=None, empty_label=None)
+  a=Business.objects.all()
+  business=forms.ModelChoiceField(queryset=a, empty_label=None)
   month=forms.ChoiceField(label='Select Month',choices=MONTH_CHOICES)
   year=forms.ChoiceField(label='Select Year',choices=YEAR_CHOICES)
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
   
-  def __int__(self,*args,**kwargs):
+  def __init__(self, *args, **kwargs):
     #self.request = kwargs.pop('request',None)
-    super(GstOffLineGenForm,self).__init__(*args,**kwargs)
+    super(GstOffLineGenForm , self).__init__(*args,**kwargs)
+    q=Business.objects.all()
+    self.fields['business'].queryset=q
     '''
     if self.request.user.is_staff:
       q=Business.objects.all()
@@ -35,8 +38,7 @@ class GstOffLineGenForm(forms.Form):
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user)
     '''
-    q=Business.objects.all()
-    self.fields['business'].queryset=q
+
    
 
   
