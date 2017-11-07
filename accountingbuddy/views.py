@@ -18,7 +18,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
-from accountingbuddy.models import MyProfile, Pricing, Business_request, SendMails,Support_request
+from accountingbuddy.models import MyProfile, Pricing, Business_request, SendMails,Support_request,Advert
 from .forms import BusinessRequestForm , SupportReqForm
 
 # Create your views here.
@@ -134,6 +134,11 @@ class SupportRequestUpdateView(UserPassesTestMixin,UpdateView):
                     return True
                  else:
                     return False
+	
+def AdvertView(request):
+	q=Advert.objects.get(id=1)
+	return HttpResponse(" %s" % q.content)
+	
 	
 
       
