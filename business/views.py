@@ -68,7 +68,7 @@ class BusinessListView(LoginRequiredMixin, generic.ListView):
 #@login_required
 def GstOffLineView(request):
   if request.method=="POST":
-    form=GstOffLineGenForm(request.POST,request.FILES)
+    form=GstOffLineGenForm(request.POST,request.FILES,request=request)
     if form.is_valid():
       print(request.POST)
       business_form=form.cleaned_data['business']
@@ -76,7 +76,7 @@ def GstOffLineView(request):
       response=GstBusiness(business=business.name).gstOffline()
       return response
   else:
-    form=GstOffLineGenForm()
+    form=GstOffLineGenForm(request=request)
   return render(request,'business/form.html',{'form':form}) 
     
   
