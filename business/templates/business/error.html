@@ -21,12 +21,30 @@
 
 {% block main %}
 <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-  
+ <style>
+     p.msg {
+      style=font-family: 'Pacifico', cursive; font-size: 20px;   
+     }
+     
+     h4.head {
+         style=font-family: 'Pacifico', cursive; font-size: 40px;  
+         
+     }
+     
+     h5.hello {
+         
+         style=font-family: 'Pacifico', cursive; font-size: 30px; 
+         
+     }
+     
+     
+     
+</style> 
     
-<h4 style=font-family: 'Pacifico', cursive; font-size: 40px; >  Oops. Your GST Export didnt go as expected. </h4>
-<p style=font-family: 'Pacifico', cursive; font-size: 20px;> Please check if you have invoices entered for the selected period. </p>
-<p style=font-family: 'Pacifico', cursive; font-size: 20px;> Or feel free to contact Support by raising a Support Request. </p>
-<h5 style=font-family: 'Pacifico', cursive; font-size: 30px; > <a href="{% url 'accountingbuddy:suppport-req' %}" >Support Request </a> </h5>
+<h4 class='head' >  Oops. Your GST Export didnt go as expected. </h4>
+<p class='msg'> Please check if you have invoices entered for the selected period. </p>
+<p class='msg'> Or feel free to contact Support by raising a Support Request. </p>
+<h5 class='hello' > <a href="{% url 'accountingbuddy:suppport-req' %}" >Support Request </a> </h5>
 
 
 <small> {{ err }}  </small>
