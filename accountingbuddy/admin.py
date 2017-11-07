@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pricing,  Business_request, SendMails,SupportTypes,Support_request
+from .models import Pricing,  Business_request, SendMails,SupportTypes,Support_request,Advert
 
 # Register your models here.
 
@@ -7,6 +7,7 @@ admin.site.register(Pricing)
 admin.site.register(Business_request)
 admin.site.register(SendMails)
 admin.site.register(SupportTypes)
+admin.site.register(Advert)
 
 
 class SupportRequestAdmin(admin.ModelAdmin):
