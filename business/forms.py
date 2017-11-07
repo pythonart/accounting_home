@@ -5,6 +5,7 @@ import calendar
 
 
 from accountingbuddy.models import   MyProfile 
+from business.models import Business
 from .models import  Business
 
 MONTH_CHOICES=[(str(k),calendar.month_abbr[k]) for k in range(1,13)]
@@ -17,7 +18,7 @@ class BusinessCreateForm(ModelForm):
     fields=['name']
     
 class GstOffLineGenForm(forms.Form):
-  q=MyProfile.objects.all()
+  q=Business.objects.all()
   business=forms.ModelChoiceField(queryset=q, empty_label=None)
   month=forms.MultipleChoiceField(label='Select Month',choices=MONTH_CHOICES)
   year=forms.MultipleChoiceField(label='Select Year',choices=YEAR_CHOICES)
@@ -26,7 +27,7 @@ class GstOffLineGenForm(forms.Form):
     self.request = kwargs.pop('request',None)
     super(GstOffLineGenForm,self).__init__(*args,**kwargs)
     select_user=MyProfile.objects.get(user=self.request.user)
-    q=MyProfile.objects.all().filter(user=select_user.id)
+    q=Business.objects.all().filter(user=select_user)
     self.fields['business'].queryset=q
       
 
