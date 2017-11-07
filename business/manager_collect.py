@@ -65,14 +65,14 @@ class GstBusiness:
     #print(response.__dict__)
     
     if self.inv_type=='b2cl':
-      response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
+      response['Content-Disposition'] = 'attachment; filename="b2cl.csv"'
       writer = csv.writer(response)
       for invoice in self.gst_invoices:
         for line in invoice.gst_tax_taxablevalue:
           writer.writerow([invoice.reference,invoice.invoice_date_gst_str,invoice.totalAmount,invoice.gst_state_code,line['rate'],line['taxablevalue'],'','' ])
     
     if self.inv_type=='b2cs':
-      response['Content-Disposition'] = 'attachment; filename="b2b.csv"'
+      response['Content-Disposition'] = 'attachment; filename="b2cs.csv"'
       writer = csv.writer(response)
       invoices=B2CLS_Output(self.gst_invoices).b2cl_str()
       own_state_code=self.businessDetails.businessIdentifier[:2]
