@@ -84,7 +84,7 @@ def GstOffLineView(request):
       try:
         response=GstBusiness(fm_date=from_date,to_date=to_date,inv_type=invoice_type,business=business.name).gstOffline()
         return response
-      except err:
+      except Exception as err:
         return render(request,'error.html',{'error':err})
   else:
     form=GstOffLineGenForm(request=request)
