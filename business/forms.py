@@ -34,8 +34,7 @@ class GstOffLineGenForm(forms.Form):
     else:
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user.user)
-      #select_user.user_id
-   
+    self.fields['business']=q   
 
   
       
