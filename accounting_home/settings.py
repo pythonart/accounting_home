@@ -369,6 +369,6 @@ EMAIL_PORT=587
 EMAIL_HOST_USER='info@accountingbuddy.org'
 #EMAIL_HOST_PASSWORD='password'  Refer local settings
 EMAIL_USE_TLS=True
-INTERNAL_IPS = ("127.0.0.1",)
+INTERNAL_IPS = ("0.0.0.0","122.167.83.34",)
 
 
