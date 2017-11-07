@@ -25,7 +25,7 @@ class GstOffLineGenForm(forms.Form):
   month=forms.ChoiceField(label='Select Month',choices=MONTH_CHOICES)
   year=forms.ChoiceField(label='Select Year',choices=YEAR_CHOICES)
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
-  '''
+  
   def __int__(self,*args,**kwargs):
     self.request = kwargs.pop('request',None)
     super(GstOffLineGenForm,self).__init__(*args,**kwargs)
@@ -35,7 +35,7 @@ class GstOffLineGenForm(forms.Form):
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user)
     self.fields['business'].queryset=q
-   '''   
+   
 
   
       
