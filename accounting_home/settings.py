@@ -286,6 +286,7 @@ MIDDLEWARE_CLASSES = (
     "mezzanine.core.middleware.SitePermissionMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",	
 )
 
 # Store these package names here as they may change in the future since
@@ -370,6 +371,6 @@ EMAIL_PORT=587
 EMAIL_HOST_USER='info@accountingbuddy.org'
 #EMAIL_HOST_PASSWORD='password'  Refer local settings
 EMAIL_USE_TLS=True
-INTERNAL_IPS = ("0.0.0.0","122.167.83.34",)
+INTERNAL_IPS = ("0.0.0.0","122.167.83.34","127.0.0.1",)
 
 
