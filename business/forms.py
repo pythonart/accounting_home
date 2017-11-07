@@ -35,7 +35,8 @@ class GstOffLineGenForm(forms.Form):
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user)
     '''  
-    self.fields['business'].queryset=MyProfile.objects.all()
+    q=MyProfile.objects.all()
+    self.fields['business'].queryset=q
    
 
   
