@@ -27,17 +27,13 @@ class GstOffLineGenForm(forms.Form):
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
   
   def __init__(self, *args, **kwargs):
-    #self.request = kwargs.pop('request',None)
-    q=Business.objects.all()
+    self.request = kwargs.pop('request',None)
     super(GstOffLineGenForm , self).__init__(*args,**kwargs)
-    self.fields['business'].queryset=q
-    '''
     if self.request.user.is_staff:
       q=Business.objects.all()
     else:
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user)
-    '''
 
    
 
