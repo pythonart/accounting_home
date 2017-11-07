@@ -26,7 +26,7 @@ class GstOffLineGenForm(forms.Form):
   invoice_type=forms.ChoiceField(label='Invoice Type',choices=INVOICE_TYPES)
   
   def __int__(self,*args,**kwargs):
-    self.request = kwargs.pop('request',None)
+    #self.request = kwargs.pop('request',None)
     super(GstOffLineGenForm,self).__init__(*args,**kwargs)
     '''
     if self.request.user.is_staff:
