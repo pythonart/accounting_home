@@ -62,7 +62,10 @@ class Support_request(models.Model):
 	
 	def __str__(self):
 	    return "%s  %s" % (self.user,self.date_time)
-			
+
+class Advert(models.Model):
+	content=models.TextField("Enter HTML Content")
+	
 	   
 			       
 class SendMails(models.Model):
