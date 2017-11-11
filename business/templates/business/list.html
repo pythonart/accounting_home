@@ -27,23 +27,39 @@
 
 <p> If your not familiar with Accounting and need to Customise the Software to your Business, Please fill the <a href={% url 'accountingbuddy:business-req'  %}> Business Request Form </a></p> 
 
-{% for item in business %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th> No </th>   
+      <th>Business Name</th>
+      <th>Created On</th>
+      <th>User </th>  
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in business %}
+      <tr>
+        <td> {{ forloop.counter }} </td>  
+        <td> {{ item.name }}</td>
+        <td> {{ item.created }}</td>
+        <td> {{ item.user }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
-{{ forloop.counter }}. <b> Business Name : </b> <i>{{ item.name }} </i> <b> Created : </b> <i> {{ item.created }} </i> <b> User : </b> {{ item.user }} <br>
-
-{% endfor %}
 <div class="pagination">
     <span class="step-links">
-        {% if contacts.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% if item.has_previous %}
+            <a href="?page={{ item.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+            Page {{ item.number }} of {{ item.paginator.num_pages }}.
         </span>
 
-        {% if contacts.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% if item.has_next %}
+            <a href="?page={{ item.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>
