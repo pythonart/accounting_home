@@ -26,7 +26,8 @@
      and login with your Email address as user name and password as password </p>
 
 <p> If your not familiar with Accounting and need to Customise the Software to your Business, Please fill the <a href={% url 'accountingbuddy:business-req'  %}> Business Request Form </a></p> 
-
+<br>
+<br>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -48,21 +49,27 @@
   </tbody>
 </table>
 
-<div class="pagination">
-    <span class="step-links">
-        {% if item.has_previous %}
-            <a href="?page={{ item.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ item.number }} of {{ item.paginator.num_pages }}.
-        </span>
-
-        {% if item.has_next %}
-            <a href="?page={{ item.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+{% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 
 {% endblock %}
 
