@@ -6,7 +6,7 @@ REGION_CHOICES=(('USA','USA'),('GULF','GULF'),('ASIA','ASIA'),('EUROPE','EUROPE'
 CURRENCY_CHOICES=(('USD','US DOLLARS'),('INR','INDIAN RUPEES'),('AED','DIRHAMS'),)
 SALES_PARTNER_CHOICES=(('SALESPARTNER','SALESPARTNER'),('INDIVIDUAL','INDIVIDUAL'))
 BUSINESS_TYPE=( ('SERVICE','SERVICES' ),('MANUFACTURING','MANUFACTURING'),('SALES','SALES'),('PERSONAL','PERSONAL'),('SOCIETY','SOCIETY' ),('SCHOOL','SCHOOL'),('SUPER MARKER','SUPER MARKET'),)
-
+SYSTEM_TYPE=(('MAC','MAC'),('WINDOWS','WINDOWS'),('UBUNTU','UBUNTU'))
 
 
 class MyProfile(models.Model):
@@ -73,4 +73,15 @@ class SendMails(models.Model):
 	
 	def __str__(self):
 	    return " %s " % self.email_id
+
+class DesktopActivationReq(models.Model):
+	user=models.ForeignKey("auth.user")
+	system_type=models.CharField("Select System",max_length=200,choices=SYSTEM_TYPE)
+	date_created=models.DateTimeField(auto_now=True)
+	
+	def __str__(self):
+		return "%s" % self.user
+				
+		
+	
 	
