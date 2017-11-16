@@ -19,10 +19,32 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
 from accountingbuddy.models import MyProfile, Pricing, Business_request, SendMails,Support_request,Advert
-from .forms import BusinessRequestForm , SupportReqForm
+from .forms import BusinessRequestForm , SupportReqForm,DesktopLicenseReq
 
 # Create your views here.
 
+@login_required
+def desktopActivationReqView(request):
+	if request.method=="POST":
+		form=DesktopLicenseReq(request.POST)
+		if form.is_valid():
+			actreq=form.save(commit=false)
+			actreq.user=request.user
+			actreq.save()
+			from_email='info@accountingbuddy.org'
+			subject="AccountingBuddy.Org Activation Code Fm %s" % user.first_name
+			text_content=" Thank you for Downloading AccountingBuddy Software. Your Activation Code For Your Business is 684 - 371 - 827 "
+			html_content=" <h4>Activation Code Generated </h4> <br> <p> Thank you for Downloading AccountingBuddy Desktop Software. Your Activation code is as below </p> <br> <h4> 684 - 371 - 827 </h4>
+			#to = ['keeganpatrao@gmail.com',]
+			to +=[user.email,]
+			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+			msg.attach_alternative(html_content, "text/html")
+			msg.send()
+			return HttpResponseRedirect(reverse('accountingbuddy:thanks')) # Change Template
+	else :
+		form=DesktopLicenseReq()
+	return render(request,'business_request_form.html', {'form': form})  # Change Template 	
+	
 
 def  pricing_india(request):
 	if  request.user.is_authenticated:
