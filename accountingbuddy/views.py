@@ -34,7 +34,7 @@ def desktopActivationReqView(request):
 			from_email='info@accountingbuddy.org'
 			subject="AccountingBuddy.Org Activation Code Fm %s" % user.first_name
 			text_content=" Thank you for Downloading AccountingBuddy Software. Your Activation Code For Your Business is 684 - 371 - 827 "
-			html_content=" <h4>Activation Code Generated </h4> <br> <p> Thank you for Downloading AccountingBuddy Desktop Software. Your Activation code is as below </p> <br> <h4> 684 - 371 - 827 </h4>
+			html_content=" <h4>Activation Code Generated </h4> <br> <p> Thank you for Downloading AccountingBuddy Desktop Software. Your Activation code is as below </p> <br> <h4> 684 - 371 - 827 </h4>"
 			#to = ['keeganpatrao@gmail.com',]
 			to +=[user.email,]
 			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
