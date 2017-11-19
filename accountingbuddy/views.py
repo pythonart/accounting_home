@@ -28,7 +28,7 @@ def desktopActivationReqView(request):
 	if request.method=="POST":
 		form=DesktopLicenseReq(request.POST)
 		if form.is_valid():
-			actreq=form.save(commit=false)
+			actreq=form.save(commit=False)
 			actreq.user=request.user
 			actreq.save()
 			from_email='info@accountingbuddy.org'
