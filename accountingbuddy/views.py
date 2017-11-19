@@ -25,6 +25,7 @@ from .forms import BusinessRequestForm , SupportReqForm,DesktopLicenseReq
 
 @login_required
 def desktopActivationReqView(request):
+	to=[]
 	if request.method=="POST":
 		form=DesktopLicenseReq(request.POST)
 		if form.is_valid():
