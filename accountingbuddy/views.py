@@ -42,7 +42,7 @@ def desktopActivationReqView(request):
 			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
 			msg.attach_alternative(html_content, "text/html")
 			msg.send()
-			return HttpResponseRedirect(reverse('accountingbuddy:thanks')) # Change Template
+			return HttpResponseRedirect(reverse('accountingbuddy:thanks_activation')) # Change Template
 	else :
 		form=DesktopLicenseReq()
 	return render(request,'business_request_form.html', {'form': form})  # Change Template 	
