@@ -31,6 +31,7 @@ def desktopActivationReqView(request):
 			actreq=form.save(commit=False)
 			actreq.user=request.user
 			actreq.save()
+			user=request.user
 			from_email='info@accountingbuddy.org'
 			subject="AccountingBuddy.Org Activation Code Fm %s" % user.first_name
 			text_content=" Thank you for Downloading AccountingBuddy Software. Your Activation Code For Your Business is 684 - 371 - 827 "
