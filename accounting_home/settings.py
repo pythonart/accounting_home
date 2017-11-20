@@ -6,6 +6,8 @@ from django import VERSION as DJANGO_VERSION
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse ,reverse_lazy
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+
 
 
 ######################
@@ -364,7 +366,7 @@ ACCOUNTS_PROFILE_VIEWS_ENABLED=True  # Users are able to see their profile.
 ACCOUNTS_NO_USERNAME=True  # Does not expose username to user. Only email address.
 ACCOUNTS_VERIFICATION_REQUIRED=True # Email Verification
 ACCOUNTS_APPROVAL_REQUIRED=False    # Accounts to be verified by Amin/Staff 
-LOGIN_REDIRECT_URL=HttpResponseRedirect('https://accountingbuddy.org/dashboard/')
+LOGIN_REDIRECT_URL='https://accountingbuddy.org/dashboard/'
 
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
