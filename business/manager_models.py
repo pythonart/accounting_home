@@ -428,8 +428,21 @@ class TaxCode:
       self.components=tax.get('Components',None)
       self.taxRate=tax.get('TaxRate',None)
       self.taxRateType=tax.get('TaxRateType',None)
-      self.rate=tax.get('Rate',None)
+      self.rate_check=tax.get('Rate',None)
       self.account=tax.get('Account',None)
+      self.rate=self.gstexempt()
+   
+   #CHECK THIS
+   def gstexempt(self):
+        if self.rate_check==None && taxcomp_exists==False:
+            rate=0.0
+            return rate
+        if self.rate_check==None && taxcomp_exists==True:
+            rate==None
+            return rate
+        else:
+            rate=tax.get('Rate',None)
+            return rate
    
    @property  
    def taxcomp_list(self):
@@ -473,7 +486,15 @@ class TaxCode:
       if self.rate is not None:
         return False
       else:
-        return True
+        for item in self.components:
+            value=False
+            if len(item) > 0:
+                value=True
+                break
+        return value        
+            
+               
+    
     
     
    def __str__(self):
