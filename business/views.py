@@ -81,11 +81,11 @@ def GstOffLineView(request):
       k,v=calendar.monthrange(year,month)
       to_date=str(v)+'/'+str(month)+'/'+str(year)
       business=Business.objects.get(id=business_form.id)
-      try:
-        response=GstBusiness(fm_date=from_date,to_date=to_date,inv_type=invoice_type,business=business.name).gstOffline()
-        return response
-      except Exception as err:
-        return render(request,'error.html',{'error':err})
+      #try:
+      response=GstBusiness(fm_date=from_date,to_date=to_date,inv_type=invoice_type,business=business.name).gstOffline()
+      return response
+      #except Exception as err:
+      #return render(request,'error.html',{'error':err})
   else:
     form=GstOffLineGenForm(request=request)
   return render(request,'business/form.html',{'form':form}) 
