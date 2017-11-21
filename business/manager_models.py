@@ -438,7 +438,7 @@ class TaxCode:
             rate=0.0
             return rate
         if self.rate_check==None and taxcomp_exists==True:
-            rate==None
+            rate=None
             return rate
         else:
             rate=tax.get('Rate',None)
