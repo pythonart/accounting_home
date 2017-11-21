@@ -434,7 +434,7 @@ class TaxCode:
    
    #CHECK THIS
    def gstexempt(self):
-        if self.rate_check==None and taxcomp_exists==False:
+        if self.rate_check==None and self.taxcomp_exists==False:
             rate=0.0
             return rate
         if self.rate_check==None and taxcomp_exists==True:
