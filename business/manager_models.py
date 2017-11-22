@@ -432,12 +432,11 @@ class TaxCode:
       self.account=tax.get('Account',None)
       self.rate=self.gstexempt()
    
-   #CHECK THIS
    def gstexempt(self):
         if self.rate_check==None and self.taxcomp_exists==False:
             rate=0.0
             return rate
-        if self.rate_check==None and taxcomp_exists==True:
+        if self.rate_check==None and self.taxcomp_exists==True:
             rate=None
             return rate
         else:
@@ -483,12 +482,12 @@ class TaxCode:
       Even if the tax is not a MultipleRate TaxCode object blank components are generated. Hence
       we use Rate in the TaxCode object. If no rate exisits its a MultipleComponent Tax and will return True.
       '''
-      if self.rate is not None:
+      if self.rate_check is not None:
         return False
       else:
         for item in self.components:
             value=False
-            if len(item) > 0:
+            if len(item) > 0 and ( item.get('Rate',None) is not None) :
                 value=True
                 break
         return value        
