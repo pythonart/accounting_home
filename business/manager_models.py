@@ -422,7 +422,7 @@ class TaxCode:
    def __init__(self,tax,code):
       ''' Stores a TaxCode and its data  Fields, code,name,components (for Multiple Rate Tax)
       taxRate (Stating its a CustomRate),taxRateType (Stating MultiRate ), Tax account code
-      '''
+      '''  
       self.code=code
       self.name=tax.get('Name',None)
       self.components=tax.get('Components',None)
@@ -430,9 +430,9 @@ class TaxCode:
       self.taxRateType=tax.get('TaxRateType',None)
       self.rate_check=tax.get('Rate',None)
       self.account=tax.get('Account',None)
-      self.rate=self.gstexempt()
+      self.rate=self.gstexempt(tax)
    
-   def gstexempt(self):
+   def gstexempt(self,tax):
         if self.rate_check==None and self.taxcomp_exists==False:
             rate=0.0
             return rate
