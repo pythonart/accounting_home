@@ -78,7 +78,9 @@ class GstBusiness:
       own_state_code=self.businessDetails.businessIdentifier[:2]
       for state in state_codes:
         if state['codeNo']==own_state_code:
-           own_state_gst_str="%s-%s" % (state['codeNo'],state['name'])
+          own_state_gst_str="%s-%s" % (state['codeNo'],state['name'])
+        else :
+          own_state_gst_str="Enter Your GSTIN in Business Identifier"
       for invoice in invoices:
         writer.writerow(['OE',own_state_gst_str,invoice['rate'],invoice['taxablevalue'],'',''])           
         
