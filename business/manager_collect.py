@@ -75,7 +75,7 @@ class GstBusiness:
       response['Content-Disposition'] = 'attachment; filename="b2cs.csv"'
       writer = csv.writer(response)
       invoices=B2CLS_Output(self.gst_invoices).b2cl_str()
-      own_state_code=self.businessDetails.businessIdentifier[:2]
+      own_state_code=self.businessDetails.businessIdentifier.strip()[:2]
       for state in state_codes:
         if state['codeNo']==own_state_code:
           own_state_gst_str="%s-%s" % (state['codeNo'],state['name'])
