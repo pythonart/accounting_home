@@ -22,7 +22,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
 from business.models import Business
-from business.forms import BusinessCreateForm, GstOffLineGenForm
+from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from accountingbuddy.models import MyProfile
@@ -89,6 +89,17 @@ def GstOffLineView(request):
   else:
     form=GstOffLineGenForm(request=request)
   return render(request,'business/form.html',{'form':form}) 
+
+
+def SalesInvoiceCreate(request):
+  if request.method=="POST":
+    form=SalesInvoiceForm(request.POST,request.FILES)
+    if form.is_valid():
+      print(form)
+  else:
+    form=SalesInvoiceForm()
+  return render(request,'business/form.html',{'form':form})
+    
     
   
   
