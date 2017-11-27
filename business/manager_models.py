@@ -89,8 +89,10 @@ class CustomerDetails:
   
  
 class SupplierDetails:
-  def __init__(self,supplier={}):
+  def __init__(self,supplier={},custom_field_list=None,code=None):
     supplier=supplier
+    self.code=code
+    self.custom_field_list=custom_field_list
     self.name=supplier.get('Name',None)
     self.email=supplier.get('Email',None)
     self.telephone=supplier.get('Telephone',None)
@@ -101,7 +103,25 @@ class SupplierDetails:
     self.customFields=supplier.get('CustomFields',None)
     self.code=supplier.get('Code',None)
     self.creditLimit=supplier.get('CreditLimit',None)
-    
+
+  @property
+  def supplier_customfield_list(self):
+    li=[]
+    for item in self.customFields:
+      c=CustomFieldsAll(self.custom_field_list).get_custom_field(item)
+      c.value=self.customFields[item]
+      li.append(c)
+    return li      
+  
+  def get_customfield_value(self,findterm):
+    findterm=findterm.strip()
+    pattern='.*'+findterm+'.*'
+    for item in self.supplier_customfield_list:
+      match=re.match(pattern,item.name, re.IGNORECASE )
+      if match is not None:
+        return item.value
+    return None
+     
   def __str__(self):
     return self.name
 
@@ -143,10 +163,10 @@ class SalesInvoice:
    @property 
    def gst_inv_type(self):
       ''' Returns type of Invoice as per GST Format'''
-      if self.customer_gstin_no is not None:
+      if self.customer_gstin_no is not None: #Check if Customer has GSTIN, If no its a B2C
         return "b2b"
       else:
-        if self.gst_intrastate is True:
+        if self.gst_intrastate is True:  
           return "b2cs"
         else :
           if  self.totalAmount > B2CS_CAP:
@@ -172,10 +192,11 @@ class SalesInvoice:
    def gst_intrastate(self):
       ''' Returns True or False if GST is from One State to Another'''
       if self.customer_gstin_no is not None:
-        if self.own_gstin[:2]==self.customer_gstin_no[:2]:
-          return True
-        else:
-          return False
+        if self.customer_gstin_no[:2].isnumeric() and self.own_gstin[:2].isnumeric():
+          if self.own_gstin[:2]==self.customer_gstin_no[:2]:
+            return True
+          else:
+            return False
       else:
         None
         
@@ -389,8 +410,8 @@ class SalesInvLine:
    
    @property
    def tax_name(self):
-      if self.tax_val_list is None:
-        return "No Tax Applied"
+      if self.taxCode is None:
+        return None
       taxobj=TaxCodesAll(self.taxli).get_tax_code(self.taxCode)
       return taxobj.name
       
@@ -597,6 +618,17 @@ class SalesInvList:
       if inv.invoice_pydatetime >= fm_date and inv.invoice_pydatetime <= to_date and inv.gst_inv_type==inv_type:
         retli.append(inv)
     return retli
+
+  def filter_inv_datewise(self,from_date,to_date):
+      #from_date and to_date Format should be (YYYY,M,DD)
+    retli=[]
+    fm_date=datetime.strptime(from_date,'%d/%m/%Y')
+    to_date=datetime.strptime(to_date,'%d/%m/%Y')
+    for inv in self.sinvli:
+      if inv.invoice_pydatetime >= fm_date and inv.invoice_pydatetime <= to_date:
+        retli.append(inv)
+    return retli_dw  
+
         
 class B2CLS_Output:
   ''' Input will be a SalesInvList filtered for Date and Inv Type containing only b2cls '''
@@ -604,7 +636,7 @@ class B2CLS_Output:
     self.retli=retli
     
   def b2cl_str(self):
-    li=[{'rate':k,'taxablevalue':0} for k in range(1,28)]
+    li=[{'rate':k,'taxablevalue':0} for k in range(1,28)] #Change to 0 to 28 if we want GST Exempt or GST Non Taxable.
     for invoice in self.retli:
       for line in invoice.gst_tax_taxablevalue:
         for tax in li:
@@ -615,7 +647,57 @@ class B2CLS_Output:
       if item['taxablevalue']!=0:
         nli.append(item)
     return nli
-        
+
+# class EXEMPSales:
+#   ''' Generate Different EXEMP Lines For Sales Invoices '''
+#   def __int__(self,retli_dw):
+#     self.invoices=retli_dw
+
+#   def exemptSupply(self):
+#     ''' Return GST CSV Format for Inter State Supply Registered Persons'''
+#     inter_state_supply_registered_persons=0
+#     intra_state_supply_registered_persons=0
+#     inter_state_supply_unregistered_persons=0
+#     intra_state_supply_unregistered_persons=0
+#     for invoice in invoices:
+#       for line in invoice.lines_list:
+#         if line.taxableValue==0 and line.tax_rate==0:   #filter where no tax value and zero rate 
+#           taxName=line.tax_name
+#           taxName=taxName.strip()
+#           pattern='.*'+exempt+'.*'
+#           match=re.match(pattern,taxName,re.IGNORECASE)
+#           if match is not None:           #check for exempt in tax name
+#             if invoice.customer_gstin_no is not None: #registered supplier
+#                if invoice.gst_intrastate is None:
+#                  raise ValueError
+#                else:
+#                  if invoice.gst_intrastate:
+#                    intra_state_supply_registered_persons += (line.amt_aft_discount * line.qty)
+#                  else:
+#                    inter_state_supply_registered_persons +=  (line.amt_aft_discount * line.qty)
+#             else:
+#               pass
+
+
+
+
+              
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           
       
       
