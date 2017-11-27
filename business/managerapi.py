@@ -208,6 +208,11 @@ class manager_object:
     def index_businessdetails(self):
         '''Fetch Business Details'''
         return self.index_objects('BusinessDetails')
+
+    def index_purchase_invoices(self):
+        '''Fetch all Purchase Invoices '''
+        return self.index_objects('PurchaseInvoice')
+
         
 # Below, fetching objects from a collection
     def get_object_thread(self, o_dict, index):
@@ -248,6 +253,10 @@ class manager_object:
     def get_sales_invoices(self):
         """Get all Sales Invoices."""
         return self.get_objects(self.index_sales_invoices())
+
+    def get_purchase_invoices(self):
+        """ Get All Purchase Invoices"""
+        return self.get_objects(self.index_purchase_invoices())    
 
     def get_tracking_codes(self):
         """Get all the tracking codes."""
@@ -291,15 +300,24 @@ class manager_object:
 
 
 # Below, all the PUT commands for the server, to update objects
-    def put_object(self, data, collection):
-        """Put an object at that specific path."""
+    def put_object(self, data, collection,index=''):
+        """Put an object at that specific path.   Used only for tabs"""
         print("Putting ", data, "to: " + self.collections[collection])
-        r = self.session.put(self.root_url + self.collections[collection],
+        r = self.session.put(self.root_url + self.collections[collection]+index,
                               data=json.dumps(data))
         if r.status_code != 201:
             print('Something went wrong', r.status_code)
             print(collection)
             print(data)           
+
+    def put_items(self,data,index):
+        ''' Update an entry '''
+        url=self.root_url+self.collections['..']+'/'+self.business+'/'+index+'.json'
+        try :
+            r=self.session.put(url,data=json.dumps(data))
+        except:
+            print("Exception at: ",index,"\n Response: ",r)    
+
 
 # Below, all the POST commands for the server, to create objects
     def post(self, data, collection):
