@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm 
 from django.core.exceptions import ValidationError
 import calendar
+from datetime import datetime    
 
 
 from accountingbuddy.models import   MyProfile 
@@ -34,7 +35,13 @@ class GstOffLineGenForm(forms.Form):
     else:
       select_user=MyProfile.objects.get(user=self.request.user)
       q=Business.objects.all().filter(user=select_user.user)
-    self.fields['business'].queryset=q   
+    self.fields['business'].queryset=q
+
+
+class SalesInvoiceForm(forms.Form):
+    invoice_date=forms.DateField(label='Invoice Date',initial=datetime.now() )
+
+
 
   
       
