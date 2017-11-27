@@ -11,4 +11,5 @@ urlpatterns=[
 url(r'^business/create/$', views.BusinessCreateView         , name='business-create'),
 url(r'^business/list/$'  , views.BusinessListView.as_view() , name='business-list'  ),
 url(r'^business/gstexport/$', views.GstOffLineView          , name='business-gst-export'),  
+url(r'^business/salesinvoice/$',views.SalesInvoiceCreate,name='sales-invoice'),
 ]
