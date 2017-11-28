@@ -42,7 +42,7 @@ class SalesInvoiceForm(forms.Form):
     IssueDate=forms.DateField(label='Invoice Date',initial=datetime.now() )
     To=forms.CharField(label="Customer",max_length=500)
     BillingAddress=forms.CharField(label="Billing Address", widget=forms.Textarea)
-    DueDateType=forms.CharField(label="Due Date",max_length=10,choices=(("Net","Net"),("By","By")) )
+    DueDateType=forms.ChoiceField(label="Due Date",max_length=10,choices=(("Net","Net"),("By","By")) )
         
 
 
