@@ -39,7 +39,11 @@ class GstOffLineGenForm(forms.Form):
 
 
 class SalesInvoiceForm(forms.Form):
-    invoice_date=forms.DateField(label='Invoice Date',initial=datetime.now() )
+    IssueDate=forms.DateField(label='Invoice Date',initial=datetime.now() )
+    To=forms.CharField(label="Customer",max_length=500)
+    BillingAddress=forms.TextField(label="Billing Address")
+    DueDateType=forms.CharField(label="Due Date",max_length=10,choices=(("Net","Net"),("By","By")) )
+        
 
 
 
