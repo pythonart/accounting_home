@@ -43,6 +43,8 @@ class SalesInvoiceForm(forms.Form):
     To=forms.CharField(label="Customer",max_length=500)
     BillingAddress=forms.CharField(label="Billing Address", widget=forms.Textarea)
     DueDateType=forms.ChoiceField(label="Due Date",choices=(("Net","Net"),("By","By")) )
+    InvoiceSummary=forms.CharField(label="Description",max_length=200)
+    
         
 
 
