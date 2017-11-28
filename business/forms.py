@@ -47,7 +47,7 @@ class SalesInvoiceForm(forms.Form):
     InvoiceSummary=forms.CharField(label="Description",max_length=200)
     
     
-class SalesInvoiceLine(forms.Form):
+class SalesInvoiceLineForm(forms.Form):
   Description=forms.CharField(label="Description",max_length=200)
   TaxCode=forms.CharField(label="Tax",max_length=200)
   Qty=forms.FloatField(label="Quantity",min_value=1,max_value=100)
