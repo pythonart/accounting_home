@@ -7,7 +7,7 @@ from django.forms import formset_factory
 
 
 from accountingbuddy.models import   MyProfile 
-from business.models import Business
+from business.models import Business, SalesInvoice, SalesInvoiceLine,
 from .models import  Business
 
 
