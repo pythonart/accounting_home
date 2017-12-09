@@ -14,8 +14,8 @@ class Business(models.Model):
 class SalesInvoice(models.Model):
   IssueDate=models.DateField('Invoice Date')
   To=models.CharField("Customer",max_length=500)
-  BillingAddress=models.CharField("Billing Address")
-  DueDateType=models.CharField("Due Date",choices=(("Net","Net"),("By","By")) )
+  BillingAddress=models.CharField("Billing Address",max_length=200)
+  DueDateType=models.CharField("Due Date",choices=(("Net","Net"),("By","By")), max_length=3,)
   InvoiceSummary=models.CharField("Description",max_length=200)
   
   def __str__(self):
