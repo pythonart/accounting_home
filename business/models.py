@@ -10,6 +10,31 @@ class Business(models.Model):
 
   def __str__(self):
     return "%s" % self.name
+  
+class SalesInvoice(models.Model):
+  IssueDate=models.DateField('Invoice Date')
+  To=models.CharField("Customer",max_length=500)
+  BillingAddress=models.CharField(label="Billing Address", widget=forms.Textarea)
+  DueDateType=models.ChoiceField(label="Due Date",choices=(("Net","Net"),("By","By")) )
+  InvoiceSummary=models.CharField(label="Description",max_length=200)
+  
+  def __str__(self):
+    return "%s" % self.IssueDate
+  
+  
+class SalesInvoiceLine(models.Model):
+  Description=models.CharField("Description",max_length=200)
+  TaxCode=models.CharField("Tax",max_length=200)
+  Qty=models.FloatField("Quantity")
+  Item=models.CharField("Item",max_length=200) 
+  Amount=models.FloatField("Amount")
+  
+  def __str__(self):
+    return "%s" % self.Description
+  
+  
+  
+  
 '''
 class BusinessDetails(models.Model):
   businessName=models.ForeignKey(Business)
