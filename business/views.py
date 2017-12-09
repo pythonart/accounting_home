@@ -109,8 +109,16 @@ def SalesInvoiceLine(request):
     form=SalesInvoiceLineForm()
   return render(request,'business/form.html',{'form':form})  
     
-    
-  
-  
+def SalesInvoiceFormSetView(request,invoice_id):
+  salesinvoice=SalesInvoice.objects.get(pk=invoice_id)
+  SalesInvoiceLineFormSet=inlineformset_factory(SalesInvoice,SalesInvoiceLine,fields=('SalesInvoice','Description','TaxCode','Qty','Item','Amount'))  
+  if request.method=="POST":
+    formset=SalesInvoiceLineFormSet(request.POST,request.FILES,instance=salesinvoice)
+    if formset.is_valid():
+      print(fromset)
+  else:
+    formset=SalesInvoiceLineFormSet(instance=salesinvoice)
+  return   render(request,'business/formset.html',{'formset': formset}) 
+      
       
   
