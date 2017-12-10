@@ -29,12 +29,12 @@
     {{ form.non_form_errors }}  {# For fromset errors  #}
     <div  class="box-body">
       <div class="form-group">  
-        <form enctype="multipart/form-data"  method="POST">
+        <form enctype="multipart/form-data" class="form-inline"  method="POST">
  
              {% csrf_token %}
           
              
-                    {% bootstrap_formset formset %}
+                    {% bootstrap_formset formset layout='inline' %}
        
                   {% buttons %}
 
