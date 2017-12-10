@@ -23,7 +23,7 @@ class SalesInvoiceMod(models.Model):
   
   
 class SalesInvoiceLineMod(models.Model):
-  SalesInvoice=models.ForeignKey(SalesInvoice)
+  SalesInvoice=models.ForeignKey(SalesInvoiceMod)
   Description=models.CharField("Description",max_length=200)
   TaxCode=models.CharField("Tax",max_length=200)
   Qty=models.FloatField("Quantity")
