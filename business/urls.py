@@ -13,5 +13,5 @@ url(r'^business/list/$'  , views.BusinessListView.as_view() , name='business-lis
 url(r'^business/gstexport/$', views.GstOffLineView          , name='business-gst-export'),  
 url(r'^business/salesinvoice/$',views.SalesInvoiceCreate,name='sales-invoice'),
 url(r'^business/salesinvline/$',views.SalesInvoiceLine,name='sales-inv-line'),  
-url(r'^business/salesinvformset/(?P<invoice_id>[0-9]+)/$',views.SalesInvoiceFormSetView,name='sales-inv-formset'),  
+url(r'^business/salesinvformset/(?P<pk>[0-9]+)/$',views.SalesInvoiceFormSetView,name='sales-inv-formset'),  
 ]
