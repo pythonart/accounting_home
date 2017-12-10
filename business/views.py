@@ -110,12 +110,13 @@ def SalesInvoiceLine(request):
   return render(request,'business/form.html',{'form':form})  
     
 def SalesInvoiceFormSetView(request,pk):
-  salesinvoice=SalesInvoiceMod.objects.get(pk=1)
+  salesinvoice=SalesInvoiceMod.objects.get(pk=pk)
   SalesInvoiceLineFormSet=inlineformset_factory(SalesInvoiceMod,SalesInvoiceLineMod,fields=('SalesInvoice','Description','TaxCode','Qty','Item','Amount'))  
   if request.method=="POST":
     formset=SalesInvoiceLineFormSet(request.POST,request.FILES,instance=salesinvoice)
     if formset.is_valid():
-      print(fromset)
+      print(formset)
+      formset.save()
   else:
     formset=SalesInvoiceLineFormSet(instance=salesinvoice)
   return   render(request,'business/formset.html',{'formset': formset}) 
