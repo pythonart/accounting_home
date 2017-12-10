@@ -11,7 +11,7 @@ class Business(models.Model):
   def __str__(self):
     return "%s" % self.name
   
-class SalesInvoice(models.Model):
+class SalesInvoiceMod(models.Model):
   IssueDate=models.DateField('Invoice Date')
   To=models.CharField("Customer",max_length=500)
   BillingAddress=models.CharField("Billing Address",max_length=200)
@@ -22,7 +22,7 @@ class SalesInvoice(models.Model):
     return "%s" % self.IssueDate
   
   
-class SalesInvoiceLine(models.Model):
+class SalesInvoiceLineMod(models.Model):
   SalesInvoice=models.ForeignKey(SalesInvoice)
   Description=models.CharField("Description",max_length=200)
   TaxCode=models.CharField("Tax",max_length=200)
