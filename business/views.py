@@ -28,7 +28,7 @@ from business.managerapi import manager_browser, manager_object, USER_NAME,PASSW
 from accountingbuddy.models import MyProfile
 from business.manager_collect import *
 import calendar
-
+from django.forms import inlineformset_factory
   
 @login_required  
 def BusinessCreateView(request):
