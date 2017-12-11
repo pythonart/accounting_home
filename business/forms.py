@@ -9,6 +9,7 @@ from django.forms import formset_factory
 from accountingbuddy.models import   MyProfile 
 from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
 from .models import  Business
+from django.forms import ModelForm
 
 
 MONTH_CHOICES=[(str(k),calendar.month_abbr[k]) for k in range(1,13)]
@@ -53,6 +54,17 @@ class SalesInvoiceLineForm(forms.Form):
   Qty=forms.FloatField(label="Quantity",min_value=1,max_value=100)
   Item=forms.CharField(label="Item",max_length=200)
   Amount=forms.FloatField(label="Amount")
+  
+class SalesInvModForm(ModelForm):
+  class Meta:
+    model=SalesInvoiceMod
+    fields=['IssueDate','To','BillingAddress','DueDateType','InvoiceSummary']
+    widgets={'BillingAddress':Textarea(attrs={'cols':80,'rows':20),'InvoiceSummary':Textarea(attrs={'cols':10,'rows':3}),}
+  
+                                       
+    
+  
+  
   
   
         
