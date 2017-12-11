@@ -62,7 +62,7 @@ class SalesInvModForm(ModelForm):
     widgets={'BillingAddress':Textarea(attrs={'cols':10,'rows':5}),'InvoiceSummary':Textarea(attrs={'cols':10,'rows':3}),}
     
 class SalesInvoiceLineModForm(ModelForm):
-  unit=forms.NumberInput(label="Unit Price")  
+  unit=forms.NumberInput()  
   class Meta:
     model=SalesInvoiceLineMod
     fields=['Description','TaxCode','Qty','Item','Amount']
