@@ -22,7 +22,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
 from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
-from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm
+from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from accountingbuddy.models import MyProfile
@@ -111,8 +111,8 @@ def SalesInvoiceLine(request):
     
 def SalesInvoiceFormSetView(request,pk):
   salesinvoice=SalesInvoiceMod.objects.get(pk=pk)
-  SalesInvoiceLineFormSet=inlineformset_factory(SalesInvoiceMod,SalesInvoiceLineMod,fields=('SalesInvoice','Description','TaxCode','Qty','Item','Amount'))  
-  #SalesInvoiceLineFormSet=inlineformset_factory(SalesInvoiceMod,SalesInvoiceLineMod,form=SalesInvoiceLineForm) 
+  #SalesInvoiceLineFormSet=inlineformset_factory(SalesInvoiceMod,SalesInvoiceLineMod,fields=('SalesInvoice','Description','TaxCode','Qty','Item','Amount'))  
+  SalesInvoiceLineFormSet=inlineformset_factory(SalesInvoiceMod,SalesInvoiceLineMod,form=SalesInvoiceLineModForm) 
   if request.method=="POST":
     formset=SalesInvoiceLineFormSet(request.POST,request.FILES,instance=salesinvoice)
     if formset.is_valid():
