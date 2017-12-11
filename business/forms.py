@@ -66,7 +66,7 @@ class SalesInvoiceLineModForm(ModelForm):
   class Meta:
     model=SalesInvoiceLineMod
     fields=['Description','TaxCode','Qty','Item','Amount']
-    widgets={'Amount':NumberInput(label="Amount",attrs={'readonly':readonly} ) }
+    widgets={'Amount':NumberInput(attrs={'readonly':readonly} ) }
   
                                        
     
