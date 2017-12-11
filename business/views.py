@@ -102,11 +102,11 @@ def SalesInvoiceCreate(request):
 
 def SalesInvoiceLine(request):
   if request.method=="POST":
-    form=SalesInvoiceLineForm(request.POST,request.FILES)
+    form=SalesInvoiceLineModForm(request.POST,request.FILES)
     if form.is_valid():
       print(form)
   else:
-    form=SalesInvoiceLineForm()
+    form=SalesInvoiceLineModForm()
   return render(request,'business/form.html',{'form':form})  
     
 def SalesInvoiceFormSetView(request,pk):
