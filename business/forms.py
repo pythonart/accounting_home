@@ -9,7 +9,7 @@ from django.forms import formset_factory
 from accountingbuddy.models import   MyProfile 
 from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
 from .models import  Business
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
 
 
 MONTH_CHOICES=[(str(k),calendar.month_abbr[k]) for k in range(1,13)]
