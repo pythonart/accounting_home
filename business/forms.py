@@ -56,11 +56,17 @@ class SalesInvoiceLineForm(forms.Form):
   Amount=forms.FloatField(label="Amount")
   
 class SalesInvModForm(ModelForm):
-  test=forms.CharField(label="Test",max_length=200)
   class Meta:
     model=SalesInvoiceMod
     fields=['IssueDate','To','BillingAddress','DueDateType','InvoiceSummary']
     widgets={'BillingAddress':Textarea(attrs={'cols':10,'rows':5}),'InvoiceSummary':Textarea(attrs={'cols':10,'rows':3}),}
+    
+class SalesInvoiceLineModForm(ModelForm):
+  unit=forms.FloatField(label="Unit Price")  
+  class Meta:
+    model=SalesInvoiceLineMod
+    fields=['Description','TaxCode','Qty','Item','Amount']
+    
   
                                        
     
