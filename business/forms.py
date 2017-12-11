@@ -59,7 +59,7 @@ class SalesInvModForm(ModelForm):
   class Meta:
     model=SalesInvoiceMod
     fields=['IssueDate','To','BillingAddress','DueDateType','InvoiceSummary']
-    widgets={'BillingAddress':Textarea(attrs={'cols':80,'rows':20),'InvoiceSummary':Textarea(attrs={'cols':10,'rows':3}),}
+    widgets={'BillingAddress':Textarea(attrs={'cols':80,'rows':20}),'InvoiceSummary':Textarea(attrs={'cols':10,'rows':3}),}
   
                                        
     
