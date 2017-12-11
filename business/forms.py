@@ -66,7 +66,7 @@ class SalesInvoiceLineModForm(ModelForm):
   class Meta:
     model=SalesInvoiceLineMod
     fields=['Description','TaxCode','Qty','Item','Amount']
-    
+    widgets={'Amount':FloatField(label="Amount",attrs={'readonly':readonly} ) }
   
                                        
     
