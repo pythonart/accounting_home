@@ -56,6 +56,7 @@ class SalesInvoiceLineForm(forms.Form):
   Amount=forms.FloatField(label="Amount")
   
 class SalesInvModForm(ModelForm):
+  test=forms.CharField(label="Test",max_length=200)
   class Meta:
     model=SalesInvoiceMod
     fields=['IssueDate','To','BillingAddress','DueDateType','InvoiceSummary']
