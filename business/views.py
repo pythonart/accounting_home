@@ -120,7 +120,7 @@ def SalesInvoiceFormSetView(request,pk):
       formset.save()
   else:
     formset=SalesInvoiceLineFormSet(instance=salesinvoice)
-  return   render(request,'business/formset.html',{'formset': formset}) 
+  return   render(request,'business/test.html',{'formset': formset}) 
       
       
   
