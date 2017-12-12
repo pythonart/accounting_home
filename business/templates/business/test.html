@@ -26,9 +26,17 @@
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
 
-{% for form in formset %}
+
+
+
 
     <form role="form" method="post">
+           
+        
+        {{ formset.management_form }}
+        
+        {% for form in formset %}
+        
         {% csrf_token %}
         {% bootstrap_form_errors form type='non_fields' %}
         <td> {{ forloop.counter }} </td>
@@ -40,9 +48,10 @@
         {% bootstrap_field form.DELETE layout='horizontal' %}
         {% bootstrap_field form.SalesInvoice layout='horizontal' type="hidden" %}
         
+            {% endfor %}
     </form>
     
-    {% endfor %}
+
         {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
 
 {% endblock %}
