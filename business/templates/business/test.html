@@ -49,9 +49,10 @@
         {% bootstrap_field form.SalesInvoice layout='horizontal' type="hidden" %}
         
             {% endfor %}
+         {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
     </form>
     
 
-        {% buttons submit='OK' reset="Cancel" %}{% endbuttons %}
+      
 
 {% endblock %}
