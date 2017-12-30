@@ -55,7 +55,7 @@ def BusinessCreateView(request):
       business_create.code=code
       business_create.save()
       from_email='info@accountingbuddy.org'
-			subject="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
+      subject="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
 			text_content="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
 			html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s " % (name,username)
 			#to = ['keeganpatrao@gmail.com',]
