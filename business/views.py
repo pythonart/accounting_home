@@ -82,7 +82,7 @@ class BusinessListView(LoginRequiredMixin, generic.ListView):
 def GstOffLineView(request):
   if request.method=="POST":
     form=GstOffLineGenForm(request.POST,request.FILES,request=request)
-    if form.is_valid():
+		if form.is_valid():
       business_form=form.cleaned_data['business']
       month=form.cleaned_data['month']
       year=form.cleaned_data['year']
