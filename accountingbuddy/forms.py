@@ -3,7 +3,7 @@ from django.forms import ModelForm , Textarea , DateTimeInput
 from django.core.exceptions import ValidationError
 from mezzanine.accounts.forms import ProfileForm
 from django.core.mail import EmailMultiAlternatives
-from .models import  Business_request, MyProfile , Pricing, Support_request,DesktopActivationReq
+from .models import  Business_request, MyProfile , Pricing, Support_request,DesktopActivationReq,SendMails
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 
@@ -44,6 +44,10 @@ class MyCustomProfileForm(ProfileForm):
 	def save(self, *args, **kwargs):
 		user = super(MyCustomProfileForm, self).save(*args, **kwargs)
 		if self._signup:
+			to=[]
+			email_obj=SendMails.objects.all()
+			for item in email_obj:
+				to.append(item.email_id)
 			passwd=self.cleaned_data.get('password1')
 			name=self.cleaned_data.get('first_name')+' '+self.cleaned_data.get('last_name')
 			username=self.cleaned_data.get('email')
@@ -53,10 +57,10 @@ class MyCustomProfileForm(ProfileForm):
 			usr_create.create_user(name=username,username=username,password=passwd)
 			#Error detection email sent below
 			from_email='info@accountingbuddy.org'
-			subject="AccountingBuddy.Org User Created Password %s  Name %s Username %s "  % (passwd,name,username)
-			text_content="AccountingBuddy.Org User Created Password %s  Name %s Username %s "  % (passwd,name,username)
-			html_content=" <h4> AccountingBuddy.Org User Created Password %s  Name %s Username %s  </h4>" % (passwd,name,username)
-			to = ['keeganpatrao@gmail.com',]
+			subject="AccountingBuddy.Org User Created   Name %s Username %s "  % (name,username)
+			text_content="AccountingBuddy.Org User Created  Name %s Username %s "  % (name,username)
+			html_content=" <h4> AccountingBuddy.Org User Created  Name %s Username %s  </h4>" % (name,username)
+			#to = ['keeganpatrao@gmail.com',]
 			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
 			msg.attach_alternative(html_content, "text/html")
 			msg.send()
