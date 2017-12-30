@@ -38,7 +38,7 @@ def BusinessCreateView(request):
       to=[]
       email_obj=SendMails.objects.all()
       for item in email_obj:
-	to.append(item.email_id)
+	 to.append(item.email_id)
       business_create=form.save(commit=False)
       business_create.user=request.user
       #create the business in Manager
