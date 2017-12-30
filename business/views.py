@@ -34,8 +34,8 @@ from django.forms import inlineformset_factory
 def BusinessCreateView(request):
   if request.method=="POST":
     form=BusinessCreateForm(request.POST,request.FILES)
-    if form.is_valid():
-      to=[]
+		if form.is_valid():
+			to=[]
 			email_obj=SendMails.objects.all()
 			for item in email_obj:
 				to.append(item.email_id)
