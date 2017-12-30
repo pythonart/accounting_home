@@ -21,7 +21,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
-from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
+from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod, SendMails
 from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
@@ -35,6 +35,10 @@ def BusinessCreateView(request):
   if request.method=="POST":
     form=BusinessCreateForm(request.POST,request.FILES)
     if form.is_valid():
+      to=[]
+			email_obj=SendMails.objects.all()
+			for item in email_obj:
+				to.append(item.email_id)
       business_create=form.save(commit=False)
       business_create.user=request.user
       #create the business in Manager
@@ -50,6 +54,14 @@ def BusinessCreateView(request):
       #completed adding user
       business_create.code=code
       business_create.save()
+      from_email='info@accountingbuddy.org'
+			subject="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
+			text_content="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
+			html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s " % (name,username)
+			#to = ['keeganpatrao@gmail.com',]
+			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+			msg.attach_alternative(html_content, "text/html")
+			msg.send()
       return HttpResponseRedirect(reverse('accountingbuddy:pricing-india'))
   else:
     form=BusinessCreateForm()
