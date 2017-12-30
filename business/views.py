@@ -56,12 +56,12 @@ def BusinessCreateView(request):
       business_create.save()
       from_email='info@accountingbuddy.org'
       subject="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
-			text_content="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
-			html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s " % (name,username)
-			#to = ['keeganpatrao@gmail.com',]
-			msg = EmailMultiAlternatives(subject, text_content, from_email, to)
-			msg.attach_alternative(html_content, "text/html")
-			msg.send()
+      text_content="AccountingBuddy.Org Business %s Created by User %s Username %s "  % (name,user_name)
+      html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s " % (name,username)
+      #to = ['keeganpatrao@gmail.com',]
+      msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+      msg.attach_alternative(html_content, "text/html")
+      msg.send()
       return HttpResponseRedirect(reverse('accountingbuddy:pricing-india'))
   else:
     form=BusinessCreateForm()
