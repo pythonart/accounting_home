@@ -10,7 +10,7 @@ admin.site.register(SendMails)
 admin.site.register(SupportTypes)
 admin.site.register(Advert)
 admin.site.register(DesktopActivationReq)
-#admin.site.register(BusinessTypes)
+admin.site.register(BusinessTypes)
 #admin.site.register(BusinessTypeFile)
 
 
