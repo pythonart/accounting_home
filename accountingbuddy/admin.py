@@ -22,4 +22,4 @@ admin.site.register(Support_request,SupportRequestAdmin)
 class BusinessTypeFileAdmin(admin.ModelAdmin):
   list_display=('businesstype','businessFile')
 
-admin.site register(BusinessTypeFile,BusinessTypeFileAdmin)
+admin.site.register(BusinessTypeFile,BusinessTypeFileAdmin)
