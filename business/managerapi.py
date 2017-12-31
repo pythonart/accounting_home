@@ -45,7 +45,20 @@ class manager_browser:
         data={'Name':self.name}
         self.browser.open(url,method='POST',data=data)
         return self.browser.response.text
-
+    
+    def import_business(self,business_file_path=None):
+        '''
+        Import a Business with path=business_file_path , path should be local on the machine, not remote
+        '''
+        self.browser.open(ROOT_URL+'/businesses')
+        import_business_link=self.browser.get_link(text='Import Business')
+        self.browser.follow_link(import_business_link)
+        import_business_form=self.browser.get_form()
+        import_business_form['File']=open(business_file_path,'rb')
+        self.browser.submit_form(import_business_form)
+        return self.browser.response.text
+        
+        
 
     def  activate_tabs(self):
         '''
