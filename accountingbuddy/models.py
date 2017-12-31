@@ -81,7 +81,13 @@ class DesktopActivationReq(models.Model):
 	
 	def __str__(self):
 		return "%s" % self.user
-				
-		
+
+class BusinessTypes(models.Model):	
+	name=models.CharField("Business Type",max_length=200,help_text="Enter Type of Business, Service, Manufacturing, Trading,Doctor etc")
+	
+class BusinessTypeFile(models.Model):
+	businesstype=models.ForeignKey(BusinessTypes)
+	businessFile=models.FileField(upload_to='BusinessTypeFiles')
+	
 	
 	
