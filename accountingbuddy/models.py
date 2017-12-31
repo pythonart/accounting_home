@@ -93,7 +93,7 @@ class BusinessTypeFile(models.Model):
 	businessFile=models.FileField(upload_to='BusinessTypeFiles')
 	
 	def __str__(self):
-		return " Type : %s   File Name: %s" %  (self.businesstype, self.businessFile.name)
+		return "  %s " %  self.businesstype
 	
 	
 	
