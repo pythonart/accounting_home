@@ -22,7 +22,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
 from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod, BusinessTypeFile 
-from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm
+from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm, ImportBusinessForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 from accountingbuddy.models import MyProfile,SendMails
@@ -70,10 +70,36 @@ def BusinessCreateView(request):
 
 def import_business_view(request):
   if request.method=="POST":
-    
-  
-
-
+    form=ImportBusinessForm(request.POST, request.FILES)
+    if form.is_valid():
+      to=['keeganpatrao@gmail.com']
+      email_obj=SendMails.objects.all()
+      #for item in email_obj:
+      #  to.append(item.email_id)
+      business_create=form.save(commit=False)
+      business_create.user=request.user
+      name=form.cleaned_data['name']
+      businessFileDetails=form.cleaned_data['businessType']
+      filepath=businessFileDetails.businessFile.path
+      bus=manager_browser()
+      code=bus.import_business(business_file_path=filepath)
+      select_user=MyProfile.objects.get(user=request.user)
+      user_name=select_user.user.email
+      bus.add_bus_user(req_user=user_name,code=code)
+      business_create.code=code
+      business_create.save()
+      from_email='info@accountingbuddy.org'
+      subject="AccountingBuddy.Org Business %s Created by User %s Username %s Code % "  % (name,user_name,code)
+      text_content="AccountingBuddy.Org Business %s Created by User %s Username %s Code % "  % (name,user_name,code)
+      html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s Code %  </h4>"  % (name,user_name,code)
+      msg = EmailMultiAlternatives(subject, text_content, from_email, to)
+      msg.attach_alternative(html_content, "text/html")
+      msg.send()
+      return HttpResponseRedirect(reverse('accountingbuddy:pricing-india'))
+  else:
+    form=ImportBusinessForm()
+  return render(request,'form.html',{'form':form})    
+      
 class BusinessListView(LoginRequiredMixin, generic.ListView):
   template_name='list.html'
   context_object_name='business'
