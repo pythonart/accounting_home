@@ -3,7 +3,7 @@ from django.forms import ModelForm , Textarea , DateTimeInput
 from django.core.exceptions import ValidationError
 from mezzanine.accounts.forms import ProfileForm
 from django.core.mail import EmailMultiAlternatives
-from .models import  Business_request, MyProfile , Pricing, Support_request,DesktopActivationReq,SendMails
+from .models import  Business_request, MyProfile , Pricing, Support_request,DesktopActivationReq,SendMails, BusinessTypeFile 
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 
@@ -13,6 +13,12 @@ def file_size(value): # Check File Size
     limit = 2 * 1024 * 1024
     if value.size > limit:
         raise ValidationError('File too large. Size should not exceed 2 MiB.')
+
+class importBusinessForm(ModelForm):
+  businessType=forms.ModelChoiceField(queryset=BusinessTypeFile.objects.all(),empty_label=None)
+  class Meta:
+    model=Business
+    fields=['name']
 	
 class DesktopLicenseReq(ModelForm):
 	class Meta:
