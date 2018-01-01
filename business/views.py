@@ -21,7 +21,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
-from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
+from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod, BusinessTypeFile 
 from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
@@ -66,6 +66,13 @@ def BusinessCreateView(request):
   else:
     form=BusinessCreateForm()
   return render(request,'form.html',{'form':form})
+
+
+def import_business_view(request):
+  if request.method=="POST":
+    
+  
+
 
 class BusinessListView(LoginRequiredMixin, generic.ListView):
   template_name='list.html'
