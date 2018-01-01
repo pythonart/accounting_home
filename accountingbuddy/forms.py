@@ -15,7 +15,7 @@ def file_size(value): # Check File Size
         raise ValidationError('File too large. Size should not exceed 2 MiB.')
 
 class importBusinessForm(ModelForm):
-  businessType=forms.ModelChoiceField(queryset=BusinessTypeFile.objects.all(),empty_label=None)
+  businessType=forms.ModelChoiceField(queryset=BusinessTypeFile.objects.all(),empty_label=None,label="Business Type",help_text="Select Business Type")
   class Meta:
     model=Business
     fields=['name']
