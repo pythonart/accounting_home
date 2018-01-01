@@ -16,5 +16,6 @@ url(r'^supportrequest/create/$',views.supportRequestCreate,name='suppport-req'),
 url(r'^supportrequest/view/$',views.SupportRequestView.as_view(),name='support-req-view'),
 url(r'^supportrequest/update/(?P<pk>[0-9]+)/$',views.SupportRequestUpdateView.as_view(),name='support-req-update'),
 url(r'^advert/$',views.AdvertView, name='advert'),
-url(r'^actcode/$',views.desktopActivationReqView,name='act-code'),  
+url(r'^actcode/$',views.desktopActivationReqView,name='act-code'),
+  
 ]
