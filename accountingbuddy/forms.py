@@ -3,7 +3,8 @@ from django.forms import ModelForm , Textarea , DateTimeInput
 from django.core.exceptions import ValidationError
 from mezzanine.accounts.forms import ProfileForm
 from django.core.mail import EmailMultiAlternatives
-from .models import  Business_request, MyProfile , Pricing, Support_request,DesktopActivationReq,SendMails, BusinessTypeFile 
+from .models import  Business_request, MyProfile , Pricing, Support_request,DesktopActivationReq,SendMails, BusinessTypeFile
+from business.models import Business 
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
 
