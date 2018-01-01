@@ -21,11 +21,11 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
-from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod, BusinessTypeFile 
+from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
 from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm, ImportBusinessForm
 
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
-from accountingbuddy.models import MyProfile,SendMails
+from accountingbuddy.models import MyProfile, SendMails, BusinessTypeFile 
 from business.manager_collect import *
 import calendar
 from django.forms import inlineformset_factory
