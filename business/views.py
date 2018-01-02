@@ -91,16 +91,21 @@ def import_business_view(request):
         o.get_business(fileName)
         code=o.business
       else:
-        raise NameError('Status Code'+bus.browser.response.status_code+'When Importing Business')        
+        raise NameError('Status Code'+bus.browser.response.status_code+'When Importing Business') 
+      bus.rename_business(self,oldName=fileName,newName=name) 
+      if bus.browser.response.status_code==200:
+        pass
+      else:
+        raise NameError('Status Code'+bus.browser.response.status_code+'When Renaming Business') 
       select_user=MyProfile.objects.get(user=request.user)
       user_name=select_user.user.email
       bus.add_bus_user(req_user=user_name,code=code)
       business_create.code=code
       business_create.save()
       from_email='info@accountingbuddy.org'
-      subject="AccountingBuddy.Org Business %s Created by User %s Username %s Code  "  % (name,user_name,code)
-      text_content="AccountingBuddy.Org Business %s Created by User %s Username %s Code  "  % (name,user_name,code)
-      html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s Code  </h4>"  % (name,user_name,code)
+      subject="AccountingBuddy.Org Business Name: %s Created by User: %s  With Code %s   "  % (name,user_name,code)
+      text_content="AccountingBuddy.Org Business Name: %s Created by User: %s  With Code %s  "  % (name,user_name,code)
+      html_content=" <h4> AccountingBuddy.Org Business Name: %s  <br> Created by User: %s <br> With Code %s   <br> </h4>"  % (name,user_name,code)
       msg = EmailMultiAlternatives(subject, text_content, from_email, to)
       msg.attach_alternative(html_content, "text/html")
       msg.send()
