@@ -123,6 +123,21 @@ class manager_browser:
         frm['Guides']='Hidden'
         mb.browser.submit_form(frm)
         return mb.browser.response
+    
+    def rename_business(self,oldName,newName):
+        '''
+        Find a Business with whos name is oldName Rename a Business to newName 
+        '''
+        self.browser.open(ROOT_URL+'/businesses')
+        oldNameLink=self.browser.get_link(text=oldName)
+        self.browser.follow_link(oldNameLink)
+        renameLink=self.browser.get_link(text='Rename')
+        self.browser.follow_link(renameLink)
+        renameForm=self.browser.get_form()
+        renameForm['Name']=newName
+        self.browser.submit_form(renameForm)
+        return self.browser.response.status_code
+        
         
 class manager_object:
     """Represents the info from the the manager.io."""
