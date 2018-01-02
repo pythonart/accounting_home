@@ -68,15 +68,15 @@ def BusinessCreateView(request):
     form=BusinessCreateForm()
   return render(request,'form.html',{'form':form})
 
-
+@login_required 
 def import_business_view(request):
   if request.method=="POST":
     form=ImportBusinessForm(request.POST, request.FILES)
     if form.is_valid():
-      to=['keeganpatrao@gmail.com']
+      to=[]
       email_obj=SendMails.objects.all()
-      #for item in email_obj:
-      #  to.append(item.email_id)
+      for item in email_obj:
+        to.append(item.email_id)
       business_create=form.save(commit=False)
       business_create.user=request.user
       name=form.cleaned_data['name']
