@@ -92,7 +92,7 @@ def import_business_view(request):
         code=o.business
       else:
         raise NameError('Status Code'+bus.browser.response.status_code+'When Importing Business') 
-      bus.rename_business(self,oldName=fileName,newName=name) 
+      bus.rename_business(oldName=fileName,newName=name) 
       if bus.browser.response.status_code==200:
         pass
       else:
