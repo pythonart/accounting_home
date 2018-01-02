@@ -98,9 +98,9 @@ def import_business_view(request):
       business_create.code=code
       business_create.save()
       from_email='info@accountingbuddy.org'
-      subject="AccountingBuddy.Org Business %s Created by User %s Username %s Code % "  % (name,user_name,code)
-      text_content="AccountingBuddy.Org Business %s Created by User %s Username %s Code % "  % (name,user_name,code)
-      html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s Code %  </h4>"  % (name,user_name,code)
+      subject="AccountingBuddy.Org Business %s Created by User %s Username %s Code  "  % (name,user_name,code)
+      text_content="AccountingBuddy.Org Business %s Created by User %s Username %s Code  "  % (name,user_name,code)
+      html_content=" <h4> AccountingBuddy.Org Business %s Created by User %s Username %s Code  </h4>"  % (name,user_name,code)
       msg = EmailMultiAlternatives(subject, text_content, from_email, to)
       msg.attach_alternative(html_content, "text/html")
       msg.send()
