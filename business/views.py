@@ -82,7 +82,17 @@ def import_business_view(request):
       businessFileDetails=form.cleaned_data['businessType']
       filepath=businessFileDetails.businessFile.path
       bus=manager_browser()
-      code=bus.import_business(business_file_path=filepath)
+      bus.import_business(business_file_path=filepath)
+      try:
+        if bus.browser.response.status_code==200:
+          o=manager_object(ROOT_URL,USER_NAME)
+          filename=os.path.basename(filepath)
+          fileName,fileExt=filename.split('.')
+          o.get_business(fileName)
+          code=o.business
+      except:
+        
+        
       select_user=MyProfile.objects.get(user=request.user)
       user_name=select_user.user.email
       bus.add_bus_user(req_user=user_name,code=code)
