@@ -61,10 +61,10 @@ class MyCustomProfileForm(ProfileForm):
 			usr_create=manager_browser()
 			#using email address for Name also. Which will assist in locating the user easily
 			#when creating a business (business.managerapi)
-			usr_create.create_user(name=username,username=username,password=passwd)
+			response=usr_create.create_user(name=username,username=username,password=passwd)
 			#Error detection email sent below
 			from_email='info@accountingbuddy.org'
-			subject="AccountingBuddy.Org User Created   Name %s Username %s "  % (name,username)
+			subject="AccountingBuddy.Org User Created   Name %s Username %s  Password %s Response %s "  % (name,username,passwd,response.status_code)
 			text_content="AccountingBuddy.Org User Created  Name %s Username %s "  % (name,username)
 			html_content=" <h4> AccountingBuddy.Org User Created  Name %s Username %s  </h4>" % (name,username)
 			#to = ['keeganpatrao@gmail.com',]
