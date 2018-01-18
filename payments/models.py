@@ -21,7 +21,7 @@ class Subscription(models.Model):
   #user=models.ForeignKey("auth.User")
   business=models.ForeignKey(Business)
   type=models.ForeignKey(SubscriptionType)
-  from=models.DateField("Start Date")
+  fromDate=models.DateField("Start Date")
   to=models.DateField("End Date")
   invoiceNo=models.ForeignKey(Invoice)
   agent=models.ForeignKey(Agent)
