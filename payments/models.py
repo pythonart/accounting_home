@@ -13,7 +13,7 @@ class Agent(models.Model):
   
 class SubscriptionType(models.Model):
   type=models.CharField("Type",max_length=200)
-  cost=modles.FloatField("Cost")
+  cost=models.FloatField("Cost")
   
   def __str__(self):
     return self.type
