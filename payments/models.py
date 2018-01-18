@@ -32,6 +32,7 @@ class Subscription(models.Model):
   @property
   def active(self):
     if to
+    
   
 class Invoice(models.Model):
   amount=models.FloatField("Amount")
