@@ -1,5 +1,6 @@
 from django.db import models
 from accountingbuddy.business.models import Business
+from datetime import date
 
 # Create your models here.
 
