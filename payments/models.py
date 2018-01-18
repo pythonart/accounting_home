@@ -4,6 +4,15 @@ from datetime import date
 
 # Create your models here.
 
+class Invoice(models.Model):
+  amount=models.FloatField("Amount")
+  discount=models.FloatField("Discount")
+  totalAmount=models.FloatField("Total Amount")
+  
+  def __str__(self):
+    return self.id
+ 
+
 class Agent(models.Model):
   name=models.CharField("Agent Name",max_length=200)
   dateRegistered=models.DateTimeField(auto_now=True)
@@ -38,14 +47,7 @@ class Subscription(models.Model):
       False 
     
   
-class Invoice(models.Model):
-  amount=models.FloatField("Amount")
-  discount=models.FloatField("Discount")
-  totalAmount=models.FloatField("Total Amount")
-  
-  def __str__(self):
-    return self.id
- 
+
   
 
   
