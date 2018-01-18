@@ -31,7 +31,10 @@ class Subscription(models.Model):
   
   @property
   def active(self):
-    if to
+    if to > date.today():
+      True
+    else:
+      False 
     
   
 class Invoice(models.Model):
