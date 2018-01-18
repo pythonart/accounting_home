@@ -241,6 +241,7 @@ if DJANGO_VERSION < (1, 9):
 INSTALLED_APPS = (
     "business",	
     "accountingbuddy",
+    "payments",	
     "nova",
     "bootstrap3",	
     "django.contrib.admin",
