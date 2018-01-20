@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Invoice,Agent,SubscriptionType,Subscription,
+from .models import Invoice,Agent,SubscriptionType,Subscription
 
 # Register your models here.
 
