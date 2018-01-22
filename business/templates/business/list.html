@@ -35,6 +35,7 @@
       <th>Business Name</th>
       <th>Created On</th>
       <th>User </th>  
+      <th>Login </th>  
     </tr>
   </thead>
   <tbody>
@@ -44,6 +45,7 @@
         <td> {{ item.name }}</td>
         <td> {{ item.created }}</td>
         <td> {{ item.user }}</td>
+        <td> <a href="{{item.url}}"> Login </a></td>   
       </tr>
     {% endfor %}
   </tbody>
