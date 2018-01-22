@@ -14,7 +14,7 @@ class Business(models.Model):
   code=models.CharField("Code",max_length=200)
   user=models.ForeignKey("auth.User")
   created = models.DateTimeField(auto_now_add=True)
-  #url=models.ForeignKey(Server,blank=True,null=True)
+  url=models.ForeignKey(Server,blank=True,null=True)
   
   def __str__(self):
     return "%s" % self.name
