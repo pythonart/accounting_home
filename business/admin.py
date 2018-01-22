@@ -5,8 +5,8 @@ from .models import  Business, Server
 
 
 class BusinessAdmin(admin.ModelAdmin):
-  list_display=('id','name','code','user','created')
-  list_filter=('id','name','code','user','created')
+  list_display=('id','name','code','user','created','url')
+  list_filter=('id','name','code','user','created','url')
   search_fields=('name','code','user','created')
   ordering=('name',)
   
