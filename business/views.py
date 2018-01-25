@@ -58,7 +58,7 @@ def BusinessCreateView(request):
       from_email='info@accountingbuddy.org'
       subject="AccountingBuddy.Org Business %s Created By Username %s "  % (name,user_name)
       text_content="AccountingBuddy.Org Business %s Created By Username %s "  % (name,user_name)
-      html_content=" <h4> AccountingBuddy.Org Business %s Created by Username %s " % (name,username)
+      html_content=" <h4> AccountingBuddy.Org Business %s Created by Username %s " % (name,user_name)
       #to = ['keeganpatrao@gmail.com',]
       msg = EmailMultiAlternatives(subject, text_content, from_email, to)
       msg.attach_alternative(html_content, "text/html")
