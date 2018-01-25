@@ -63,7 +63,7 @@ def BusinessCreateView(request):
       msg = EmailMultiAlternatives(subject, text_content, from_email, to)
       msg.attach_alternative(html_content, "text/html")
       msg.send()
-      return HttpResponseRedirect(reverse('accountingbuddy:pricing-india'))
+      return HttpResponseRedirect(reverse('business:business-list'))
   else:
     form=BusinessCreateForm()
   return render(request,'form.html',{'form':form})
