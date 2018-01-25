@@ -5,12 +5,13 @@ from datetime import date
 # Create your models here.
 
 class Invoice(models.Model):
+  number=models.CharField("Invoice No",max_length=200)
   amount=models.FloatField("Amount")
   discount=models.FloatField("Discount")
   totalAmount=models.FloatField("Total Amount")
   
   def __str__(self):
-    return self.amount
+    return self.number
  
 
 class Agent(models.Model):
