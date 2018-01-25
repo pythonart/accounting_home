@@ -10,7 +10,7 @@ class Invoice(models.Model):
   totalAmount=models.FloatField("Total Amount")
   
   def __str__(self):
-    return self.id
+    return self.amount
  
 
 class Agent(models.Model):
