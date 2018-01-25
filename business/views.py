@@ -21,7 +21,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.mail import EmailMultiAlternatives
 
-from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod
+from business.models import Business, SalesInvoiceMod, SalesInvoiceLineMod, Server
 from business.forms import BusinessCreateForm, GstOffLineGenForm, SalesInvoiceForm, SalesInvoiceLineForm, SalesInvModForm, SalesInvoiceLineModForm
 from accountingbuddy.forms import ImportBusinessForm
 from business.managerapi import manager_browser, manager_object, USER_NAME,PASSWORD,ROOT_URL
@@ -36,6 +36,7 @@ def BusinessCreateView(request):
   if request.method=="POST":
     form=BusinessCreateForm(request.POST,request.FILES)
     if form.is_valid():
+      s=Server.objects.get(url='https://users.accountingbuddy.org/')
       to=[]
       email_obj=SendMails.objects.all()
       for item in email_obj:
@@ -54,6 +55,7 @@ def BusinessCreateView(request):
       bus.add_bus_user(req_user=user_name,code=code)
       #completed adding user
       business_create.code=code
+      business_create.url=s
       business_create.save()
       from_email='info@accountingbuddy.org'
       subject="AccountingBuddy.Org Business %s Created By Username %s "  % (name,user_name)
@@ -73,6 +75,7 @@ def import_business_view(request):
   if request.method=="POST":
     form=ImportBusinessForm(request.POST, request.FILES)
     if form.is_valid():
+      s=Server.objects.get(url='https://users.accountingbuddy.org/')
       to=[]
       email_obj=SendMails.objects.all()
       for item in email_obj:
@@ -101,6 +104,7 @@ def import_business_view(request):
       user_name=select_user.user.email
       bus.add_bus_user(req_user=user_name,code=code)
       business_create.code=code
+      business_create.url=s
       business_create.save()
       from_email='info@accountingbuddy.org'
       subject="AccountingBuddy.Org Business Name: %s Created by User: %s  With Code %s   "  % (name,user_name,code)
